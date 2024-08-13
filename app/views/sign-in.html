@@ -1,0 +1,75 @@
+{% extends "layouts/main.html" %}
+
+{% block pageTitle %}
+  Question page template – {{ serviceName }} – GOV.UK Prototype Kit
+{% endblock %}
+
+
+
+{% block beforeContent %}
+<div class="govuk-phase-banner">
+  <p class="govuk-phase-banner__content">
+    <strong class="govuk-tag govuk-phase-banner__content__tag">
+      PROTOTYPE
+    </strong>
+    <span class="govuk-phase-banner__text">
+      This is not a real service
+  </p>
+</div>
+
+  {{ govukBackLink({
+  text: "Back",
+  href: "javascript:window.history.back()"
+}) }}
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <div class="govuk-form-group">
+        <div class="govuk-form-group">
+          <h1 class="govuk-label-wrapper">
+            <label class="govuk-label govuk-label--l" for="reference-number">
+              Enter your claim reference number
+            </label>
+          </h1>
+          <div id="reference-number-hint" class="govuk-hint">
+            Check your confirmation email from the Department for Education for your claim reference number. This will be in the format ABC1234D.
+          </div>
+          <input class="govuk-input govuk-input--width-10" id="reference-number" name="referenceNumber" type="text" spellcheck="false" aria-describedby="reference-number-hint" inputmode="numeric">
+          </div>
+        </div>
+
+        <form class="form" id="claim-reference-form" action="" method="post">
+
+
+        {{ govukButton({
+          text: "Continue"
+        }) }}
+
+      </form>
+
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('claim-reference-form').addEventListener('submit', function(event) {
+      event.preventDefault(); // Prevent the default form submission
+      
+      // Get the value from the input field
+      const input = document.getElementById('reference-number').value.trim().toUpperCase();
+  
+      // Check if the input matches the valid code
+      if (input === 'HDJ2123F') {
+        // Redirect to the correct page if the code is valid
+        window.location.href = '/one-login-sign-in';
+      } else {
+        // Redirect to the incorrect code page if the code is invalid
+        window.location.href = '/incorrect-code';
+      }
+    });
+  </script>
+
+
+{% endblock %}

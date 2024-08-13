@@ -1,0 +1,18 @@
+{
+  "scripts": {
+    "dev": "govuk-prototype-kit dev",
+    "serve": "govuk-prototype-kit serve",
+    "start": "govuk-prototype-kit start"
+  },
+  "dependencies": {
+    "@govuk-prototype-kit/common-templates": "2.0.1",
+    "axios": "^1.7.2",
+    "dotenv": "^16.4.5",
+    "esm": "^3.2.25",
+    "govuk-frontend": "5.5.0",
+    "govuk-prototype-kit": "13.16.2",
+    "http-proxy-middleware": "^3.0.0",
+    "node-fetch": "^3.3.2",
+    "notifications-node-client": "^8.2.1"
+  }
+}

@@ -1,0 +1,47 @@
+{% extends "layouts/main.html" %}
+
+{% block pageTitle %}
+  Content page template – {{ serviceName }} – GOV.UK Prototype Kit
+{% endblock %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+    text: "Back",
+    href: "javascript:window.history.back()"
+  }) }}
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+  
+        <h1 class="govuk-heading-l">
+          Prove your identity with GOV.UK One Login
+        </h1>
+  
+
+        <p>You’ll need: </p>
+
+<ul class="govuk-list govuk-list--bullet">
+  <li>a GOV.UK One Login – we’ll ask you to sign in or create one when you continue</li>
+  <li>your photo ID</li>
+  <li>your current home address (you might also need your previous address if you’ve recently moved)</li>
+</ul>
+
+
+<div class="govuk-inset-text">
+  You can also <a href="">use GOV.UK One Login in Welsh (Cymraeg).</a> Not all ways to prove your identity are available in Welsh yet.
+</div>
+
+
+<div class="govuk-button-primary">
+  <button type="submit" class="govuk-button" data-module="govuk-button" onclick="location.href='/one-login-idv-success'">
+    Continue
+  </button>
+</div>
+
+      </div>
+    </div>
+
+{% endblock %}

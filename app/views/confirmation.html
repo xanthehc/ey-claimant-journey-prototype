@@ -1,0 +1,42 @@
+{% extends "layouts/main.html" %}
+
+{% block pageTitle %}
+  Confirmation page template – {{ serviceName }} – GOV.UK Prototype Kit
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      {{ govukPanel({
+        titleText: "Claim submitted",
+        html: "Your reference number<br><strong>HDJ2123F</strong>"
+      }) }}
+
+      <h2 class="govuk-heading-m">
+        You've successfully submitted a claim for an early years financial incentive payment on behalf of {{ data['firstName'] }} {{ data['lastName'] }}.
+      </h2>
+
+      <p>
+        We've sent a confirmation email to {{ data['emailAddress'] }}.
+      </p>
+
+      <h2 class="govuk-heading-m">
+        What happens next
+      </h2>
+
+      <p>
+        We’ll send an email to your employee asking for them to provide some further information. We’ll also ask them to provide their payment details.
+      </p>
+
+      <p>
+        For more information, read more about the
+        <a href="#">early years financial incentive</a>.
+      </p>
+
+
+    </div>
+  </div>
+
+{% endblock %}

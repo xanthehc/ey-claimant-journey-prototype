@@ -1,0 +1,80 @@
+{% extends "layouts/main.html" %}
+
+{% block pageTitle %}
+  Start page template – {{ serviceName }} – GOV.UK Prototype Kit
+{% endblock %}
+
+{% block header %}
+  <!-- Blank header with no service name for the start page -->
+  {{ govukHeader() }}
+{% endblock %}
+
+{% block beforeContent %}
+<div class="govuk-phase-banner">
+  <p class="govuk-phase-banner__content">
+    <strong class="govuk-tag govuk-phase-banner__content__tag">
+      PROTOTYPE
+    </strong>
+    <span class="govuk-phase-banner__text">
+      This is not a real service
+  </p>
+</div>
+
+
+{{ govukBackLink({
+  text: "Back",
+  href: "javascript:window.history.back()"
+}) }}
+
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <h2 class="govuk-heading-m">
+        What is the early years financial incentive?
+      </h2>
+
+      <p>The early years financial incentive is a new scheme to support nurseries with hiring new practitioners.</p>
+
+        <p>It will enable some nurseries to advertise jobs with a £1000 sign-on bonus attached.</p>
+
+        <p>The scheme will apply to nurseries that offer free childcare entitlements, in particular local authority areas.</p>
+
+        <h2 class="govuk-heading-m">
+        Who will receive the payment?
+      </h2>
+
+      <p>
+        Most people who are new to working in early years or are returning to the profession can receive the £1000 payment. Some extra eligibility criteria will apply depending on their role and previous experience.</p>
+      
+        <h2 class="govuk-heading-m">
+          What happens before the recruitment stage?
+        </h2>
+
+      <p>The local authority will have a set number of financial incentives that these nurseries can use to recruit new staff.</p>
+
+        <p>They will also be directed to guidance explaining that they will need to use a digital service to submit claims for payment on behalf of new practitioners. They will be directed to a link to this service.</p>
+
+        <p>Nurseries will provide an email address to their local authority to be used to log in to the digital service.</p>
+
+        <h2 class="govuk-heading-m">
+          How will the payment process work?
+        </h2>
+      
+        <p>When a practitioner has been recruited for a role with an incentive attached, the nursery will use the digital service to submit a claim for the £1000 payment on the practitioner’s behalf.</p> 
+        
+        <p>When the nursery has submitted the claim, the practitioner will receive an email asking them to add their payment details.</p>
+        
+        <p>The practitioner will then receive the one-off £1000 payment after they have been in the role for 6 months. This will be paid directly to the practitioner by the Department for Education.</p>
+        
+        <img src="/public/images/Timeline/new.jpg" style="width: 100%; height: auto;" alt="timeline of claim payments">
+
+    </div>
+
+  
+  </div>
+
+{% endblock %}

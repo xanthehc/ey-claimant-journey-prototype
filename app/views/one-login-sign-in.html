@@ -1,0 +1,54 @@
+{% extends "layouts/main.html" %}
+
+{% block pageTitle %}
+  Content page template – {{ serviceName }} – GOV.UK Prototype Kit
+{% endblock %}
+
+{% block beforeContent %}
+<div class="govuk-phase-banner">
+  <p class="govuk-phase-banner__content">
+    <strong class="govuk-tag govuk-phase-banner__content__tag">
+      PROTOTYPE
+    </strong>
+    <span class="govuk-phase-banner__text">
+      This is not a real service
+  </p>
+</div>
+  {{ govukBackLink({
+    text: "Back",
+    href: "javascript:window.history.back()"
+  }) }}
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+  
+        <h1 class="govuk-heading-l">
+          Sign in with GOV.UK One Login
+        </h1>
+  
+        <p>
+          You’ll need to sign in to your GOV.UK One Login account to apply. If you don’t have an account yet, we’ll help you create one. </p>
+
+        <p>To create a GOV.UK One Login account, you’ll need: </p>
+
+<ul class="govuk-list govuk-list--bullet">
+  <li>an email address</li>
+  <li>a way to get security codes - this can be a mobile phone number or an authenticator app</li>
+</ul>
+
+<p>When you’ve signed in to GOV.UK One Login, you’ll return to this service to complete your claim. </p>
+
+
+{{ govukButton({
+  text: "Continue",
+  href: "/one-login-create-account",
+  isStartButton: false
+}) }}
+
+      </div>
+    </div>
+
+{% endblock %}

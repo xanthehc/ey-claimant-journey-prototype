@@ -1,0 +1,164 @@
+{% extends "layouts/main.html" %}
+
+{% block pageTitle %}
+  Question page template – {{ serviceName }} – GOV.UK Prototype Kit
+{% endblock %}
+
+
+
+{% block beforeContent %}
+<div class="govuk-phase-banner">
+  <p class="govuk-phase-banner__content">
+    <strong class="govuk-tag govuk-phase-banner__content__tag">
+      PROTOTYPE
+    </strong>
+    <span class="govuk-phase-banner__text">
+      This is not a real service
+  </p>
+</div>
+
+  {{ govukBackLink({
+  text: "Back",
+  href: "javascript:window.history.back()"
+}) }}
+{% endblock %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds-from-desktop">
+
+      <h1 class="govuk-heading-xl">
+        Check your answers before submitting this claim
+      </h1>
+
+        <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Employee's workplace
+            </dt>
+            <dd class="govuk-summary-list__value">
+              {{ data['nurseryName'] }}
+            </dd>
+            <dd class="govuk-summary-list__actions">
+              <a class="govuk-link" href="/current-school">Change<span class="govuk-visually-hidden"> name</span></a>
+            </dd>
+          </div>
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Employee's name
+            </dt>
+            <dd class="govuk-summary-list__value">
+              {{ data['firstName'] }} {{ data['middleName'] }} {{ data['lastName'] }}
+            </dd>
+            <dd class="govuk-summary-list__actions">
+              <a class="govuk-link" href="/claimant-name">Change<span class="govuk-visually-hidden"> date of birth</span></a>
+            </dd>
+          </div>
+          
+            <div class="govuk-summary-list__row">
+              <dt class="govuk-summary-list__key">
+                Employee's start date
+              </dt>
+              <dd class="govuk-summary-list__value" id="startDate"></dd>
+              <dd class="govuk-summary-list__actions">
+                <a class="govuk-link" href="/start-date">Change<span class="govuk-visually-hidden"> customer reference</span></a>
+              </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+              <dt class="govuk-summary-list__key">
+                Confirmation that employee is contracted to spend most of their time working with children
+              </dt>
+              <dd class="govuk-summary-list__value">
+                Confirmed
+              </dd>
+              <dd class="govuk-summary-list__actions">
+                <a class="govuk-link" href="/child-facing-A">Change<span class="govuk-visually-hidden"> home address</span></a>
+              </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+              <dt class="govuk-summary-list__key">
+                Confirmation that employee is eligible to receive financial incentive based on their previous employment
+              </dt>
+              <dd class="govuk-summary-list__value">
+                Confirmed
+              </dd>
+              <dd class="govuk-summary-list__actions">
+                <a class="govuk-link" href="/returner-1">Change<span class="govuk-visually-hidden"> home address</span></a>
+              </dd>
+            </div>
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Employee's email address
+            </dt>
+            <dd class="govuk-summary-list__value">
+              {{ data['employeeEmail'] }}
+            </dd>
+            <dd class="govuk-summary-list__actions">
+              <a class="govuk-link" href="/employee-email">Change<span class="govuk-visually-hidden"> licence type</span></a>
+            </dd>
+          </div>
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Employer's PAYE reference number
+            </dt>
+            <dd class="govuk-summary-list__value">
+              {{ data['employeePaye'] }}
+            </dd>
+            <dd class="govuk-summary-list__actions">
+              <a class="govuk-link" href="/paye-reference">Change<span class="govuk-visually-hidden"> home address</span></a>
+            </dd>
+          </div>
+        </dl>
+        <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+        <h2 class="govuk-heading-m">Before submitting this application</h2>
+        <p class="govuk-body">By submitting this application you're confirming that, to the best of your knowledge, the details you’re providing are correct. </p>
+          
+        <div id="provider-name-group" class="govuk-form-group">
+          <label class="govuk-label" for="provider-name">
+            Your full name
+          </label>
+          <p id="provider-name-error" class="govuk-error-message" style="display: none;">
+            <span class="govuk-visually-hidden">Error:</span> You cannot submit this application without providing your full name
+          </p>
+          <input class="govuk-input" id="provider-name" name="providerName" type="text" aria-describedby="provider-name-hint provider-name-error">
+        </div>
+
+        <form class="form" action="/confirmation" method="post" onsubmit="return validateForm()">
+          <input type="hidden" name="answers-checked" value="true">
+          <button type="submit" class="govuk-button" data-module="govuk-button">
+            Accept and send
+          </button>
+        </form>
+      </div>
+    </div>
+  </main>
+</div>
+      </form>
+
+    </div>
+  </div>
+
+  <script>
+    // Retrieve start date from session storage
+    const startDateString = sessionStorage.getItem('startDate');
+    if (startDateString) {
+      const startDate = new Date(startDateString);
+      const options = { day: 'numeric', month: 'long', year: 'numeric' };
+      const formattedStartDate = startDate.toLocaleDateString('en-GB', options);
+      document.getElementById('startDate').textContent = formattedStartDate;
+    }
+  </script>
+
+<script>
+  function validateForm() {
+    var providerName = document.getElementById("provider-name").value;
+    if (providerName.trim() === "") {
+      document.getElementById("provider-name-group").classList.add("govuk-form-group--error");
+      document.getElementById("provider-name-error").style.display = "block";
+      return false;
+    }
+    return true;
+  }
+</script>
+
+{% endblock %}

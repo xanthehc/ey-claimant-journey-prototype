@@ -1,0 +1,59 @@
+{#
+For guidance on how to use layouts see:
+https://prototype-kit.service.gov.uk/docs/how-to-use-layouts
+#}
+
+{% extends "govuk-prototype-kit/layouts/govuk-branded.njk" %}
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+  
+      {% include "govuk-prototype-kit/includes/homepage-top.njk" %}
+  
+      <h1 class="govuk-heading-xl">
+        {{ serviceName }}
+      </h1>
+  
+      {% include "govuk-prototype-kit/includes/homepage-bottom.njk" %}
+    </div>
+  </div>
+  
+
+  {% block beforeContent %}
+<div class="govuk-phase-banner">
+  <p class="govuk-phase-banner__content">
+    <strong class="govuk-tag govuk-phase-banner__content__tag">
+      PROTOTYPE
+    </strong>
+    <span class="govuk-phase-banner__text">
+      This is not a real service
+  </p>
+</div>
+
+{% endblock %}
+
+{% block footer %}
+ {{ govukFooter({
+   meta: {
+     items: [
+       {
+         href: "/manage-prototype",
+         text: "Manage your prototype"
+       },
+       {
+        href: "/sign-in",
+        text: "Skip sign in"
+      },
+      {
+        href: "/one-login-idv-fail",
+        text: "IDV fail"
+      },
+       {
+         href: "/manage-prototype/clear-data",
+         text: "Clear data"
+       }
+     ],
+     visuallyHiddenTitle: "Footer links"
+   }
+ }) }}
+{% endblock %}

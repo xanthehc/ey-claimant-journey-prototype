@@ -1,0 +1,62 @@
+{% extends "layouts/main.html" %}
+
+{% block beforeContent %}
+<div class="govuk-phase-banner">
+  <p class="govuk-phase-banner__content">
+    <strong class="govuk-tag govuk-phase-banner__content__tag">
+      PROTOTYPE
+    </strong>
+    <span class="govuk-phase-banner__text">
+      This is not a real service
+  </p>
+</div>
+
+  {{ govukBackLink({
+  text: "Back",
+  href: "javascript:window.history.back()"
+}) }}
+{% endblock %}
+
+{% block content %}
+
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <form class="form" id="email-form" method="post"> 
+      {{ govukInput({
+        label: {
+          text: "Enter your email address",
+          classes: "govuk-label--l",
+          isPageHeading: true
+        },
+        id: "email-address",
+        name: "emailAddress",
+        type: "email",
+        autocomplete: "email",
+        spellcheck: false
+      }) }}
+
+      {{ govukButton({
+        text: "Submit",
+        id: "submit-button"
+      })}}
+    </form>
+  </div>
+</div>
+
+{% endblock %}
+
+<script>
+
+const sendEmail = require('./test'); // Import the sendEmail function
+
+  document.getElementById('emailForm').addEventListener('submit', function(event) {
+      event.preventDefault(); // Prevent default form submission
+      
+      const email = document.getElementById('email').value; // Get user input email
+      
+      // Call sendEmail function with the user input email
+      sendEmail(email);
+  });
+
+  </script>
