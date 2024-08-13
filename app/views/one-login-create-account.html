@@ -1,17 +1,29 @@
-{% extends "layouts/main.html" %}
+{% extends "layouts/one-login.html" %}
 
 {% block pageTitle %}
   Content page template – {{ serviceName }} – GOV.UK Prototype Kit
 {% endblock %}
 
 {% block beforeContent %}
+<div class="govuk-phase-banner">
+  <p class="govuk-phase-banner__content">
+    <strong class="govuk-tag govuk-phase-banner__content__tag">
+      PROTOTYPE
+    </strong>
+    <span class="govuk-phase-banner__text">
+      This is not a real service
+  </p>
+</div>
   {{ govukBackLink({
     text: "Back",
     href: "javascript:window.history.back()"
   }) }}
 {% endblock %}
 
+
 {% block content %}
+
+
 
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">

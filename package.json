@@ -10,6 +10,7 @@
     "dotenv": "^16.4.5",
     "esm": "^3.2.25",
     "govuk-frontend": "5.5.0",
+    "govuk-one-login-service-header": "github:govuk-one-login/service-header",
     "govuk-prototype-kit": "13.16.2",
     "http-proxy-middleware": "^3.0.0",
     "node-fetch": "^3.3.2",
