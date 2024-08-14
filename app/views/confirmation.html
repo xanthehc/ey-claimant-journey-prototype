@@ -1,16 +1,34 @@
-{% extends "layouts/main.html" %}
+{% extends "di-govuk-one-login-service-header/layouts/service-header.html" %}
 
 {% block pageTitle %}
-  Confirmation page template – {{ serviceName }} – GOV.UK Prototype Kit
+  {{ serviceName }} – GOV.UK Prototype Kit
+  
+{% endblock %}
+
+{% block beforeContent %}
+<div class="govuk-phase-banner">
+  <p class="govuk-phase-banner__content">
+    <strong class="govuk-tag govuk-phase-banner__content__tag">
+      PROTOTYPE
+    </strong>
+    <span class="govuk-phase-banner__text">
+      This is not a real service
+  </p>
+</div>
+{{ govukBackLink({
+  text: "Back",
+  href: "javascript:window.history.back()"
+}) }}
 {% endblock %}
 
 {% block content %}
+
 
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
 
       {{ govukPanel({
-        titleText: "Claim submitted",
+        titleText: "You applied for an early years financial incentive payment",
         html: "Your reference number<br><strong>HDJ2123F</strong>"
       }) }}
 
@@ -27,16 +45,48 @@
       </h2>
 
       <p>
-        We’ll send an email to your employee asking for them to provide some further information. We’ll also ask them to provide their payment details.
+        Your application will be reviewed by the Department for Education. If approved, you’ll receive the payment in one lump sum.
       </p>
 
+      <p>After 6 months in your role, we'll check that you’re still working at your organisation. If you are, you’ll receive your payment in 6-8 weeks time. We’ll email you updates on the progress of your application. </p>
+
+      <p>You’ll be informed of the progress of your application after you’ve been in your role for 6 months. You’ll also receive emails to confirm: </p>
+      <ul class="govuk-list govuk-list--bullet">
+        <li>if your application is accepted or rejected/li>
+        <li>when your payment has been made. We’ll give you a full breakdown of how much you have received</li>
+      </ul>
+      
       <p>
-        For more information, read more about the
-        <a href="#">early years financial incentive</a>.
-      </p>
+        <a href="#">What do you think of this service?</a> (takes 30 seconds)</p>
 
 
     </div>
   </div>
 
+{% endblock %}
+
+{% block footer %}
+{{ govukFooter({
+  meta: {
+    items: [
+      {
+        href: "/manage-prototype",
+        text: "Manage your prototype"
+      },
+      {
+       href: "/sign-in",
+       text: "Skip sign in"
+     },
+     {
+       href: "/one-login-idv-fail",
+       text: "IDV fail"
+     },
+      {
+        href: "/manage-prototype/clear-data",
+        text: "Clear data"
+      }
+    ],
+    visuallyHiddenTitle: "Footer links"
+  }
+}) }}
 {% endblock %}
