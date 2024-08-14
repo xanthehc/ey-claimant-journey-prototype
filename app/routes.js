@@ -16,75 +16,80 @@ router.post('/email-address-page', (req, res) => {
 	res.redirect('/confirmation-page');
 })
 
+router.post('/email-address', (req, res) => {
+	const notify = new NotifyClient(process.env.NOTIFYAPIKEY);
+	notify.sendEmail(
+		'f6d30fef-01b2-4839-a32d-3912b6949027',
+		req.body.emailAddress
+	)
 
+	res.redirect('/email-otp');
+})
 
-router.post('/test', function(request, response) {
-  // Assuming session data is set properly with declaration-B
-  var declarationB = request.session.data['declarationB'];
-
-  if (declarationB === "yes") {
-      response.redirect("/returner-1");
+router.post('/handle-confirm', function(req, res) {
+  if (req.body.action === 'confirm') {
+      res.redirect('/mobile-number');
+  } else if (req.body.action === 'change_email') {
+      res.redirect('/email-address');
   } else {
-      response.redirect("/ineligible");
+      res.redirect('/'); // Default route or error handling
   }
 });
 
-// Route to handle form submission from /child-facing-A
-router.post('/child-facing-A', function(request, response) {
-  // Always redirect to /returner-1
-  response.redirect("/returner-1");
-});
+// Handle form submission
+router.post('/mobile-number', function (req, res) {
+  // Get the value of the selected radio button
+  const mobileNumber = req.body.mobileNumber; // Use req.body to get form data
 
-// Route to handle form submission from /returner-1
-router.post('/returner-1', function(request, response) {
-  // Get the value of the radio buttons
-  var returnerOne = request.body.returnerOne;
-
-  // Redirect based on the radio button value
-  if (returnerOne === "no") {
-      response.redirect("/employee-email");
+  // Check the value and redirect accordingly
+  if (mobileNumber === 'yes') {
+    res.redirect('/mobile-number-input');
   } else {
-      response.redirect("/returner-2");
+    res.redirect('/bank-account-select');
   }
 });
 
+const notify = new NotifyClient(process.env.NOTIFYAPIKEY);
 
-router.post('/returner-2', function(request, response) {
-  // Assuming session data is set properly with returnerOne
-  var returnerTwo = request.session.data['returnerTwo'];
+router.post('/mobile-number-input', (req, res) => {
+  const mobileNumber = req.body.mobileInput;
 
-  if (returnerTwo === "yes") {
-      // Generate a random number (0 or 1)
-      var randomRoute = Math.random() < 0.5 ? "/returner-4A" : "/returner-4B";
-      response.redirect(randomRoute);
-  } 
-  else {
-      response.redirect("/employee-email");
+  if (!mobileNumber) {
+    // Handle case where mobile number is missing
+    return res.status(400).send('Mobile number is required.');
   }
+
+  // Send the SMS via Notify
+  notify.sendSms(
+    '45e73a8a-0ee1-4f3d-a8e8-59bd4d0a76a2', // Replace with your template ID
+    mobileNumber,
+    {
+      personalisation: {
+        // Add any personalisation if needed
+      }
+    }
+  )
+  .then(() => {
+    // Redirect to the confirmation page after SMS is sent
+    res.redirect('/mobile-number-otp');
+  })
+  .catch((err) => {
+    console.error('Error sending SMS:', err);
+    // Handle error, e.g., redirect to an error page or show an error message
+    res.status(500).send('Failed to send SMS. Please try again later.');
+  });
 });
 
-
-router.post('/returner-4A', function(request, response) {
-  // Assuming session data is set properly with returnerOne
-  var returnerThree = request.session.data['returnerThree'];
-
-  if (returnerThree === "no") {
-      response.redirect("/ineligible");
-  }
-  else {
-      response.redirect("/employee-email");
-  }
-});
-
-router.post('/returner-4B', function(request, response) {
-  var returnerFour = request.body.returnerFour;
-
-  if (returnerFour === "permanent") {
-      response.redirect("/ineligible");
+router.post('/handle-redirect', function(req, res) {
+  if (req.body.action === 'confirm') {
+      res.redirect('/bank-account-select');
+  } else if (req.body.action === 'change_mobile') {
+      res.redirect('/mobile-number-input');
   } else {
-      response.redirect("/employee-email");
+      res.redirect('/'); // Default route or error handling
   }
 });
+
 
 
 

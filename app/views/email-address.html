@@ -1,0 +1,69 @@
+{% extends "di-govuk-one-login-service-header/layouts/service-header.html" %}
+
+{% block pageTitle %}
+  {{ serviceName }} – GOV.UK Prototype Kit
+  
+{% endblock %}
+
+{% block beforeContent %}
+<div class="govuk-phase-banner">
+  <p class="govuk-phase-banner__content">
+    <strong class="govuk-tag govuk-phase-banner__content__tag">
+      PROTOTYPE
+    </strong>
+    <span class="govuk-phase-banner__text">
+      This is not a real service
+  </p>
+</div>
+{{ govukBackLink({
+  text: "Back",
+  href: "javascript:window.history.back()"
+}) }}
+{% endblock %}
+
+{% block content %}
+
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <form class="form" id="email-form" method="post"> 
+      <span class="govuk-caption-l">Personal details</span>
+      <h1 class="govuk-heading-xl">Email address</h1>
+
+      <div id="event-name-hint" class="govuk-hint">
+        <p style="color:#505A5F;">We recommend you use a non-work email address in case your circumstances change while we process your payment.</p>
+        <p style="color:#505A5F;">To verify your email address we will send you an email with a 6-digit passcode. You can enter the passcode on the next screen.</p>
+      </div>
+
+      {{ govukInput({
+        id: "email-address",
+        name: "emailAddress",
+        type: "email",
+        autocomplete: "email",
+        spellcheck: false
+      }) }}
+
+      {{ govukButton({
+        text: "Continue",
+        id: "submit-button"
+      })}}
+    </form>
+  </div>
+</div>
+
+{% endblock %}
+
+<script>
+
+const sendEmail = require('./test'); // Import the sendEmail function
+
+  document.getElementById('emailForm').addEventListener('submit', function(event) {
+      event.preventDefault(); // Prevent default form submission
+      
+      const email = document.getElementById('email').value; // Get user input email
+      
+      // Call sendEmail function with the user input email
+      sendEmail(email);
+  });
+
+  </script>

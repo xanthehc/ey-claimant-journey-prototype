@@ -1,0 +1,158 @@
+{% extends "di-govuk-one-login-service-header/layouts/service-header.html" %}
+
+{% block pageTitle %}
+  {{ serviceName }} – GOV.UK Prototype Kit
+  
+{% endblock %}
+
+{% block beforeContent %}
+<div class="govuk-phase-banner">
+  <p class="govuk-phase-banner__content">
+    <strong class="govuk-tag govuk-phase-banner__content__tag">
+      PROTOTYPE
+    </strong>
+    <span class="govuk-phase-banner__text">
+      This is not a real service
+  </p>
+</div>
+{{ govukBackLink({
+  text: "Back",
+  href: "javascript:window.history.back()"
+}) }}
+{% endblock %}
+
+{% block content %}
+
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+<h1 class="govuk-heading-xl">
+    Personal details
+  </h1>
+
+  <h2 class="govuk-heading-l">
+    What is your full name?
+  </h2>
+
+
+<div class="govuk-form-group">
+    <label class="govuk-label" for="first-name">
+      First name
+    </label>
+    <input class="govuk-input" id="first-name" name="firstName" type="text" spellcheck="false" autocomplete="name">
+  </div>
+  <div class="govuk-form-group">
+    <label class="govuk-label" for="middle-name">
+      Middle names
+    </label>
+    <input class="govuk-input" id="middle-name" name="middleName" type="text" spellcheck="false" autocomplete="name">
+  </div>
+  <div class="govuk-form-group">
+    <label class="govuk-label" for="last-name">
+      Last name
+    </label>
+    <input class="govuk-input" id="last-name" name="lastName" type="text" spellcheck="false" autocomplete="name">
+  </div>
+
+  <br>
+
+  <div class="govuk-form-group">
+    <fieldset class="govuk-fieldset" role="group" aria-describedby="dob-hint">
+      <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+        <h1 class="govuk-fieldset__heading">
+         What is your date of birth?
+        </h1>
+      </legend>
+      <div id="dob-hint" class="govuk-hint">
+        For example, 31 03 1980. We need this information to verify your identity.
+      </div>
+      <div class="govuk-date-input" id="dob-issued">
+        <div class="govuk-date-input__item">
+          <div class="govuk-form-group">
+            <label class="govuk-label govuk-date-input__label" for="dob-issued-day">
+              Day
+            </label>
+            <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="dob-issued-day" name="dob-issued-day" type="text" inputmode="numeric">
+          </div>
+        </div>
+        <div class="govuk-date-input__item">
+          <div class="govuk-form-group">
+            <label class="govuk-label govuk-date-input__label" for="dob-issued-month">
+              Month
+            </label>
+            <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="dob-issued-month" name="dob-issued-month" type="text" inputmode="numeric">
+          </div>
+        </div>
+        <div class="govuk-date-input__item">
+          <div class="govuk-form-group">
+            <label class="govuk-label govuk-date-input__label" for="dob-issued-year">
+              Year
+            </label>
+            <input class="govuk-input govuk-date-input__input govuk-input--width-4" id="dob-issued-year" name="dob-issued-year" type="text" inputmode="numeric">
+          </div>
+        </div>
+      </div>
+    </fieldset>
+  </div>
+
+  <br>
+
+  <div class="govuk-form-group">
+    <fieldset class="govuk-fieldset" role="group" aria-describedby="dob-hint">
+      <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+        <h1 class="govuk-fieldset__heading">
+        What is your National Insurance number?
+        </h1>
+      </legend>
+      <div id="dob-hint" class="govuk-hint">
+        It’s on your National Insurance card, benefit letter, payslip or P60. For example ‘QQ123456C’.
+      </div>
+      <div class="govuk-date-input" id="dob-issued">
+        <div class="govuk-date-input__item">
+            <div class="govuk-form-group">
+                <input class="govuk-input govuk-input--width-10" id="width-10" name="nationalInsuranceNumber" type="text">
+              </div>
+        </div>
+
+        </div>
+    </div>
+
+    
+        {{ govukButton({
+          text: "Continue",
+          href: "/enter-home-address",
+          isStartButton: false
+        }) }}
+
+
+
+
+{% endblock %}
+
+
+{% block footer %}
+{{ govukFooter({
+  meta: {
+    items: [
+      {
+        href: "/manage-prototype",
+        text: "Manage your prototype"
+      },
+      {
+       href: "/sign-in",
+       text: "Skip sign in"
+     },
+     {
+       href: "/one-login-idv-fail",
+       text: "IDV fail"
+     },
+      {
+        href: "/manage-prototype/clear-data",
+        text: "Clear data"
+      }
+    ],
+    visuallyHiddenTitle: "Footer links"
+  }
+}) }}
+{% endblock %}

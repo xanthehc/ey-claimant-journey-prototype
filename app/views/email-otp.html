@@ -1,0 +1,107 @@
+{% extends "di-govuk-one-login-service-header/layouts/service-header.html" %}
+
+{% block pageTitle %}
+  {{ serviceName }} – GOV.UK Prototype Kit
+  
+{% endblock %}
+
+{% block beforeContent %}
+<div class="govuk-phase-banner">
+  <p class="govuk-phase-banner__content">
+    <strong class="govuk-tag govuk-phase-banner__content__tag">
+      PROTOTYPE
+    </strong>
+    <span class="govuk-phase-banner__text">
+      This is not a real service
+  </p>
+</div>
+{{ govukBackLink({
+  text: "Back",
+  href: "javascript:window.history.back()"
+}) }}
+{% endblock %}
+
+{% block content %}
+
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+  
+
+    <div class="govuk-form-group">
+      <h1 class="govuk-label-wrapper">
+        <label class="govuk-label govuk-label--xl" for="event-name">
+          <span class="govuk-caption-xl">Email address verification</span>
+          Enter the 6-digit passcode
+        </label>
+      </h1>
+      <br>
+      <div id="event-name-hint" class="govuk-hint">
+        <p style="color:#505A5F;">We have sent an email to {{ data['emailAddress'] }} with a 6-digit passcode.</p>
+      <p style="color:#505A5F;">The passcode will expire 15 minutes after you receive it.</p>
+    </div>
+    <div class="govuk-form-group">
+      <input class="govuk-input govuk-input--width-10" id="passcode-number" name="passcodeNumber" type="text">
+    </div>
+    </div>
+
+
+    <form action="/handle-confirm" method="post">
+      <div class="govuk-button-group">
+          <button type="submit" name="action" value="confirm" class="govuk-button">
+              Confirm
+          </button>
+          <button type="submit" name="action" value="change_email" class="govuk-button govuk-button--secondary">
+              Change email address
+          </button>
+      </div>
+  </form>
+  
+
+</div>
+</div>
+
+
+{% endblock %}
+
+{% block footer %}
+{{ govukFooter({
+  meta: {
+    items: [
+      {
+        href: "/manage-prototype",
+        text: "Manage your prototype"
+      },
+      {
+       href: "/sign-in",
+       text: "Skip sign in"
+     },
+     {
+       href: "/one-login-idv-fail",
+       text: "IDV fail"
+     },
+      {
+        href: "/manage-prototype/clear-data",
+        text: "Clear data"
+      }
+    ],
+    visuallyHiddenTitle: "Footer links"
+  }
+}) }}
+{% endblock %}
+
+<script>
+
+  const sendEmail = require('./test'); // Import the sendEmail function
+  
+    document.getElementById('personalDetailsEmail').addEventListener('submit', function(event) {
+        event.preventDefault(); // Prevent default form submission
+        
+        const email = document.getElementById('email').value; // Get user input email
+        
+        // Call sendEmail function with the user input email
+        sendEmail(email);
+    });
+  
+    </script>

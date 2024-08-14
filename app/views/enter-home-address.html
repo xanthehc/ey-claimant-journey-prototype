@@ -1,0 +1,100 @@
+{% extends "di-govuk-one-login-service-header/layouts/service-header.html" %}
+
+{% block pageTitle %}
+  {{ serviceName }} – GOV.UK Prototype Kit
+  
+{% endblock %}
+
+{% block beforeContent %}
+<div class="govuk-phase-banner">
+  <p class="govuk-phase-banner__content">
+    <strong class="govuk-tag govuk-phase-banner__content__tag">
+      PROTOTYPE
+    </strong>
+    <span class="govuk-phase-banner__text">
+      This is not a real service
+  </p>
+</div>
+{{ govukBackLink({
+  text: "Back",
+  href: "javascript:window.history.back()"
+}) }}
+{% endblock %}
+
+{% block content %}
+
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    <span class="govuk-caption-xl">Personal details</span>
+    <h1 class="govuk-heading-xl">What is your address?</h1>
+
+    <div class="govuk-form-group">
+      <label class="govuk-label" for="house-number-or-name">
+        House number or name
+      </label>
+      <input class="govuk-input" id="house-number-or-name" name="housetNumberOrName" type="text">
+    </div>
+    <div class="govuk-form-group">
+      <label class="govuk-label" for="building-and-street">
+        Building and street
+      </label>
+      <input class="govuk-input" id="building-and-street" name="buildingAndStreet" type="text">
+    </div>
+    <div class="govuk-form-group">
+      <label class="govuk-label" for="town-or-city">
+        Town or city
+      </label>
+      <input class="govuk-input govuk-input--width-20" id="town-or-city" name="townOrCity" type="text">
+    </div>
+    <div class="govuk-form-group">
+      <label class="govuk-label" for="county">
+        County
+      </label>
+      <input class="govuk-input govuk-input--width-20" id="county" name="countyName" type="text">
+    </div>
+    <div class="govuk-form-group">
+      <label class="govuk-label" for="post-code">
+        Postcode
+      </label>
+      <input class="govuk-input govuk-input--width-5" id="post-code" name="postCode" type="text">
+    </div>
+
+    </div>
+  </div>
+
+
+  {{ govukButton({
+    text: "Continue",
+    href: "/email-address",
+    isStartButton: false
+  }) }}
+
+{% endblock %}
+
+{% block footer %}
+{{ govukFooter({
+  meta: {
+    items: [
+      {
+        href: "/manage-prototype",
+        text: "Manage your prototype"
+      },
+      {
+       href: "/sign-in",
+       text: "Skip sign in"
+     },
+     {
+       href: "/one-login-idv-fail",
+       text: "IDV fail"
+     },
+      {
+        href: "/manage-prototype/clear-data",
+        text: "Clear data"
+      }
+    ],
+    visuallyHiddenTitle: "Footer links"
+  }
+}) }}
+{% endblock %}

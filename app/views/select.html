@@ -1,0 +1,19 @@
+{% extends "govuk-prototype-kit/layouts/govuk-branded.njk" %}
+
+<link rel="stylesheet" href="/app/dist/location-autocomplete.min.css" />
+{% block content %}
+<select id="location-autocomplete">
+    <option value="territory:AE-AZ">Abu Dhabi</option>
+    <option value="country:AF">Afghanistan</option>
+    …
+  </select>
+
+  {% endblock %}
+  <!-- At the end of your <body> -->
+<script type="text/javascript" src="/app/dist/location-autocomplete.min.js"></script>
+<script type="text/javascript">
+  openregisterLocationPicker({
+    selectElement: document.getElementById('location-autocomplete'),
+    url: '/assets/location-autocomplete-graph.json'
+  })
+</script>

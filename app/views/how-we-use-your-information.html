@@ -1,0 +1,99 @@
+{% extends "di-govuk-one-login-service-header/layouts/service-header.html" %}
+
+{% block pageTitle %}
+  {{ serviceName }} – GOV.UK Prototype Kit
+  
+{% endblock %}
+
+{% block beforeContent %}
+<div class="govuk-phase-banner">
+  <p class="govuk-phase-banner__content">
+    <strong class="govuk-tag govuk-phase-banner__content__tag">
+      PROTOTYPE
+    </strong>
+    <span class="govuk-phase-banner__text">
+      This is not a real service
+  </p>
+</div>
+{{ govukBackLink({
+  text: "Back",
+  href: "javascript:window.history.back()"
+}) }}
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <h1 class="govuk-heading-l">
+        How we’ll use the information you provide
+      </h1>
+
+      <h2 class="govuk-heading-m">
+        How we process your application 
+      </h2>
+
+      <p>We will check the information you have provided with the early years provider where you currently work.</p>
+
+      <h2 class="govuk-heading-m">
+        How we pay you
+      </h2>
+
+      <p>DfE will make the payment directly to you.</p>
+      <p>To complete the rest of your application, you will need your:</p>
+      <ul class="govuk-list govuk-list--bullet">
+        <li>National Insurance number</li>
+        <li>bank account details</li>
+      </ul>
+
+      <h2 class="govuk-heading-m">
+        Student loan deductions
+      </h2>
+
+      <p>If you’re currently paying off a student loan, a deduction from your payment will go towards repaying it.</p>
+
+      <h2 class="govuk-heading-m">
+        Income Tax
+      </h2>
+
+      <p>We’ll pay your Income Tax and National Insurance contributions up to the basic tax rate of 20%, which is currently £12,571 to £50,270.</p>
+      <p>We can not pay any Income Tax and National Insurance contributions over the higher rate of 40%, which is currently £50,271 to £125,140.</p>
+      <p>Read more about payments and deductions for <a href="">early years financial incentive payment.</a></p>
+
+      <br>
+      {{ govukButton({
+        text: "Continue",
+        href: "/personal-details",
+        isStartButton: false
+      }) }}
+
+
+{% endblock %}
+
+
+{% block footer %}
+{{ govukFooter({
+  meta: {
+    items: [
+      {
+        href: "/manage-prototype",
+        text: "Manage your prototype"
+      },
+      {
+       href: "/sign-in",
+       text: "Skip sign in"
+     },
+     {
+       href: "/one-login-idv-fail",
+       text: "IDV fail"
+     },
+      {
+        href: "/manage-prototype/clear-data",
+        text: "Clear data"
+      }
+    ],
+    visuallyHiddenTitle: "Footer links"
+  }
+}) }}
+{% endblock %}

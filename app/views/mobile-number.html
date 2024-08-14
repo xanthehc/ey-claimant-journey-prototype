@@ -1,0 +1,92 @@
+{% extends "di-govuk-one-login-service-header/layouts/service-header.html" %}
+
+{% block pageTitle %}
+  {{ serviceName }} – GOV.UK Prototype Kit
+  
+{% endblock %}
+
+{% block beforeContent %}
+<div class="govuk-phase-banner">
+  <p class="govuk-phase-banner__content">
+    <strong class="govuk-tag govuk-phase-banner__content__tag">
+      PROTOTYPE
+    </strong>
+    <span class="govuk-phase-banner__text">
+      This is not a real service
+  </p>
+</div>
+{{ govukBackLink({
+  text: "Back",
+  href: "javascript:window.history.back()"
+}) }}
+{% endblock %}
+
+{% block content %}
+
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+  
+
+    <form action="/mobile-number" method="POST">
+      <div class="govuk-form-group">
+        <h1 class="govuk-label-wrapper">
+          <label class="govuk-label govuk-label--xl" for="mobileNumber">
+            <span class="govuk-caption-xl">Personal details</span>
+            Would you like to provide your mobile number?
+          </label>
+        </h1>
+        <br>
+        <div id="event-name-hint" class="govuk-hint">
+          We will only use this number if we are unable to contact you via email. It may slow down your application if we are unable to reach you.
+        </div>
+        <div class="govuk-radios" data-module="govuk-radios">
+          <div class="govuk-radios__item">
+            <input class="govuk-radios__input" id="mobileNumberYes" name="mobileNumber" type="radio" value="yes">
+            <label class="govuk-label govuk-radios__label" for="mobileNumberYes">
+              Yes
+            </label>
+          </div>
+          <div class="govuk-radios__item">
+            <input class="govuk-radios__input" id="mobileNumberNo" name="mobileNumber" type="radio" value="no">
+            <label class="govuk-label govuk-radios__label" for="mobileNumberNo">
+              No
+            </label>
+          </div>
+        </div>
+      </div>
+      <button type="submit" class="govuk-button" data-module="govuk-button">
+        Continue
+      </button>
+    </form>
+    
+
+
+{% endblock %}
+
+{% block footer %}
+{{ govukFooter({
+  meta: {
+    items: [
+      {
+        href: "/manage-prototype",
+        text: "Manage your prototype"
+      },
+      {
+       href: "/sign-in",
+       text: "Skip sign in"
+     },
+     {
+       href: "/one-login-idv-fail",
+       text: "IDV fail"
+     },
+      {
+        href: "/manage-prototype/clear-data",
+        text: "Clear data"
+      }
+    ],
+    visuallyHiddenTitle: "Footer links"
+  }
+}) }}
+{% endblock %}

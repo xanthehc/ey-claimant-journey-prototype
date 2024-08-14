@@ -1,0 +1,109 @@
+{% extends "di-govuk-one-login-service-header/layouts/service-header.html" %}
+
+{% block pageTitle %}
+  {{ serviceName }} – GOV.UK Prototype Kit
+  
+{% endblock %}
+
+{% block beforeContent %}
+<div class="govuk-phase-banner">
+  <p class="govuk-phase-banner__content">
+    <strong class="govuk-tag govuk-phase-banner__content__tag">
+      PROTOTYPE
+    </strong>
+    <span class="govuk-phase-banner__text">
+      This is not a real service
+  </p>
+</div>
+{{ govukBackLink({
+  text: "Back",
+  href: "javascript:window.history.back()"
+}) }}
+{% endblock %}
+
+{% block content %}
+
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+  
+
+    <form action="/payroll-gender" method="POST">
+      <div class="govuk-form-group">
+        <h1 class="govuk-label-wrapper">
+          <label class="govuk-label govuk-label--l">
+            Enter your personal bank account details
+          </label>
+        </h1>
+        <br>
+        <div class="govuk-form-group">
+          <h1 class="govuk-label-wrapper">
+            <label class="govuk-label govuk-label" for="bank-account-name">
+              Name on your account
+            </label>
+          </h1>
+          <div id="bank-account-name-hint" class="govuk-hint">
+            For example: your name as it appears on your bank statements or bank card.
+          </div>
+          <input class="govuk-input govuk-!-width-full" id="bank-account-name" name="bankAccountName" type="text" spellcheck="false" aria-describedby="bank-account-name-hint" inputmode="numeric">
+        </div>
+        <div class="govuk-form-group">
+          <h1 class="govuk-label-wrapper">
+            <label class="govuk-label govuk-label" for="sort-code">
+              Sort code
+            </label>
+          </h1>
+          <div id="sort-code-hint" class="govuk-hint">
+            For example: 44 00 26
+          </div>
+          <input class="govuk-input govuk-input--width-10" id="sort-code" name="sortCode" type="text" spellcheck="false" aria-describedby="sort-code-hint" inputmode="numeric">
+        </div>
+        <div class="govuk-form-group">
+          <h1 class="govuk-label-wrapper">
+            <label class="govuk-label govuk-label" for="account-number">
+              Account number
+            </label>
+          </h1>
+          <div id="sort-code-hint" class="govuk-hint">
+            For example: 70872490
+          </div>
+          <input class="govuk-input govuk-input--width-20" id="account-number" name="accountNumber" type="text" spellcheck="false" aria-describedby="account-number-hint" inputmode="numeric">
+        </div>
+        </div>
+
+        <p>Please check you have provided the correct bank details. Incorrect details will cause a delay to your payment.</p>
+
+      <button type="submit" class="govuk-button" data-module="govuk-button">
+        Continue
+      </button>
+    </form>    
+
+
+{% endblock %}
+
+{% block footer %}
+{{ govukFooter({
+  meta: {
+    items: [
+      {
+        href: "/manage-prototype",
+        text: "Manage your prototype"
+      },
+      {
+       href: "/sign-in",
+       text: "Skip sign in"
+     },
+     {
+       href: "/one-login-idv-fail",
+       text: "IDV fail"
+     },
+      {
+        href: "/manage-prototype/clear-data",
+        text: "Clear data"
+      }
+    ],
+    visuallyHiddenTitle: "Footer links"
+  }
+}) }}
+{% endblock %}
