@@ -36,11 +36,15 @@
           Enter the 6-digit passcode
         </label>
       </h1>
-      <br>
+      
       <div id="event-name-hint" class="govuk-hint">
-        <p style="color:#505A5F;">We have sent an email to {{ data['mobileInput'] }} with a 6-digit passcode.</p>
-      <p style="color:#505A5F;">The passcode will expire 15 minutes after you receive it.</p>
-    </div>
+        We've sent an SMS to {{ data['mobileInput'] }} with a 6-digit passcode.
+      </div>
+
+    <div id="event-name-hint" class="govuk-hint">
+     The passcode will expire after 15 minutes.
+  </div>
+
     <div class="govuk-form-group">
       <input class="govuk-input govuk-input--width-10" id="passcode-number" name="passcodeNumber" type="text">
     </div>
