@@ -31,29 +31,37 @@
     Personal details
   </h1>
 
-  <h2 class="govuk-heading-m">
-    What is your full name?
-  </h2>
+  <h2 class="govuk-heading-m">What is your full name?</h2>
 
+  <form class="form" action="/enter-home-address" method="post">
+    <p>
+      <div id="first-name-group" class="govuk-form-group">
+        <label class="govuk-label" for="first-name">
+          First name
+        </label>
+        <p id="first-name-error" class="govuk-error-message" style="display: none;">
+          <span class="govuk-visually-hidden">Error:</span> Enter employee's first name
+        </p>
+        <input class="govuk-input" id="first-name" name="firstName" type="text" value="{{ data['first-name'] }}" autocomplete="first-name">
+      </div>
+      <div id="first-name-group" class="govuk-form-group">
+        <label class="govuk-label" for="middle-name">
+          Middle names
+        </label>
+        </p>
+        <input class="govuk-input" id="middle-name" name="middleName" type="text" value="{{ data['middle-name'] }}" autocomplete="middle-name">
+      </div>
 
-<div class="govuk-form-group">
-    <label class="govuk-label" for="first-name">
-      First name
-    </label>
-    <input class="govuk-input" id="first-name" name="firstName" type="text" spellcheck="false" autocomplete="name">
-  </div>
-  <div class="govuk-form-group">
-    <label class="govuk-label" for="middle-name">
-      Middle names
-    </label>
-    <input class="govuk-input" id="middle-name" name="middleName" type="text" spellcheck="false" autocomplete="name">
-  </div>
-  <div class="govuk-form-group">
-    <label class="govuk-label" for="last-name">
-      Last name
-    </label>
-    <input class="govuk-input" id="last-name" name="lastName" type="text" spellcheck="false" autocomplete="name">
-  </div>
+      <div id="last-name-group" class="govuk-form-group">
+        <label class="govuk-label" for="last-name">
+          Last name
+        </label>
+        <p id="last-name-error" class="govuk-error-message" style="display: none;">
+          <span class="govuk-visually-hidden">Error:</span> Enter employee's last name
+        </p>
+        <input class="govuk-input" id="last-name" name="lastName" type="text" value="{{ data['last-name'] }}" autocomplete="last-name">
+      </div>
+    </p>
 
   <br>
 
@@ -89,7 +97,7 @@
             <label class="govuk-label govuk-date-input__label" for="dob-issued-year">
               Year
             </label>
-            <input class="govuk-input govuk-date-input__input govuk-input--width-4" id="dob-issued-year" name="dob-issued-year" type="text" inputmode="numeric">
+            <input class="govuk-input govuk-date-input__input govuk-input--width-4" id="dob-issued-year" name="dobYear" type="text" inputmode="numeric">
           </div>
         </div>
       </div>
@@ -119,14 +127,12 @@
     </div>
 
     
-        {{ govukButton({
-          text: "Continue",
-          href: "/enter-home-address",
-          isStartButton: false
-        }) }}
+    {{ govukButton({
+      text: "Continue"
+    }) }}
 
 
-
+      </form>
 
 {% endblock %}
 

@@ -93,18 +93,3 @@
   }
 }) }}
 {% endblock %}
-
-<script>
-
-  const sendEmail = require('./test'); // Import the sendEmail function
-  
-    document.getElementById('personalDetailsEmail').addEventListener('submit', function(event) {
-        event.preventDefault(); // Prevent default form submission
-        
-        const email = document.getElementById('email').value; // Get user input email
-        
-        // Call sendEmail function with the user input email
-        sendEmail(email);
-    });
-  
-    </script>

@@ -90,6 +90,19 @@ router.post('/handle-redirect', function(req, res) {
   }
 });
 
+router.post('/personal-details', function (req, res) {
+  req.session.data['firstName'] = req.body.firstName;
+  req.session.data['middleName'] = req.body.middleName;
+  req.session.data['lastName'] = req.body.lastName;
+  res.redirect('/check-answers');
+});
+
+// Check answers page GET request
+router.get('/check-answers', function (req, res) {
+  res.render('check-answers');
+});
+
+
 
 
 

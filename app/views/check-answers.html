@@ -39,7 +39,7 @@
         <dl class="govuk-summary-list govuk-!-margin-bottom-9">
           <div class="govuk-summary-list__row">
             <dt class="govuk-summary-list__key">
-              What is your full name?
+              Full name
             </dt>
             <dd class="govuk-summary-list__value">
               {{ data['firstName'] }} {{ data['middleName'] }} {{ data['lastName'] }}
@@ -52,10 +52,10 @@
 
           <div class="govuk-summary-list__row">
             <dt class="govuk-summary-list__key">
-              What is your date of birth
+              Date of birth
             </dt>
             <dd class="govuk-summary-list__value">
-              {{ data['dob-issued-day'] }} {{ data['dob-issued-month'] }} {{ data['dob-issued-year'] }}
+              {{ data['dobDay'] }} {{ data['dobMonth'] }} {{ data['dobYear'] }}
             </dd>
             <dd class="govuk-summary-list__actions">
               <a class="govuk-link" href="/personal-details">Change<span class="govuk-visually-hidden"> date of birth</span></a>
@@ -64,7 +64,7 @@
 
           <div class="govuk-summary-list__row">
             <dt class="govuk-summary-list__key">
-              What is your National Insurance number?
+              National Insurance number
             </dt>
             <dd class="govuk-summary-list__value">
               {{ data['nationalInsuranceNumber'] }}
@@ -73,7 +73,98 @@
               <a class="govuk-link" href="/personal-details">Change<span class="govuk-visually-hidden"> date of birth</span></a>
             </dd>
           </div>
+
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Home address
+            </dt>
+            <dd class="govuk-summary-list__value">
+             <p> {{ data['houseNumberOrName'] }} {{ data['buildingAndStreet'] }}  {{ data['postCode'] }} </p>
+             <p> {{ data['townOrCity'] }} </p> 
+             <p> {{ data['countyName'] }} </p>
+            </dd>
+            <dd class="govuk-summary-list__actions">
+              <a class="govuk-link" href="/enter-home-address">Change<span class="govuk-visually-hidden"> date of birth</span></a>
+            </dd>
+          </div>
+
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Preferred email address
+            </dt>
+            <dd class="govuk-summary-list__value">
+              {{ data['emailAddress'] }}
+            </dd>
+            <dd class="govuk-summary-list__actions">
+              <a class="govuk-link" href="/email-address">Change<span class="govuk-visually-hidden"> date of birth</span></a>
+            </dd>
+          </div>
+
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Preferred mobile number
+            </dt>
+            <dd class="govuk-summary-list__value">
+              {{ data['mobileInput'] }}
+            </dd>
+            <dd class="govuk-summary-list__actions">
+              <a class="govuk-link" href="/mobile-number-input">Change<span class="govuk-visually-hidden"> date of birth</span></a>
+            </dd>
+          </div>
+          </dl>
+
+          <h2 class="govuk-heading-l">
+            Bank account information
+          </h2>
+
+          <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Name on the account
+            </dt>
+            <dd class="govuk-summary-list__value">
+              {{ data['bankAccountName'] }}
+            </dd>
+            <dd class="govuk-summary-list__actions">
+              <a class="govuk-link" href="/bank-account-select">Change<span class="govuk-visually-hidden"> date of birth</span></a>
+            </dd>
+          </div>
+
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Sort code
+            </dt>
+            <dd class="govuk-summary-list__value">
+              {{ data['sortCode'] }}
+            </dd>
+            <dd class="govuk-summary-list__actions">
+              <a class="govuk-link" href="/bank-account-select">Change<span class="govuk-visually-hidden"> date of birth</span></a>
+            </dd>
+          </div>
           
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Account number
+            </dt>
+            <dd class="govuk-summary-list__value">
+              {{ data['accountNumber'] }}
+            </dd>
+            <dd class="govuk-summary-list__actions">
+              <a class="govuk-link" href="/bank-account-select">Change<span class="govuk-visually-hidden"> date of birth</span></a>
+            </dd>
+          </div>
+
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Payroll gender
+            </dt>
+            <dd class="govuk-summary-list__value">
+              {{ data['genderPayroll'] }}
+            </dd>
+            <dd class="govuk-summary-list__actions">
+              <a class="govuk-link" href="/payroll-gender">Change<span class="govuk-visually-hidden"> date of birth</span></a>
+            </dd>
+          </div>
             
       </dl>
         <form class="form" action="/confirmation" method="post" onsubmit="return validateForm()">
@@ -91,6 +182,16 @@
     </div>
   </div>
 
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Retrieve values from sessionStorage
+      document.getElementById('house-number-or-name-value').textContent = sessionStorage.getItem('houseNumberOrName');
+      document.getElementById('building-and-street-value').textContent = sessionStorage.getItem('buildingAndStreet');
+      document.getElementById('town-or-city-value').textContent = sessionStorage.getItem('townOrCity');
+      document.getElementById('county-value').textContent = sessionStorage.getItem('county');
+      document.getElementById('post-code-value').textContent = sessionStorage.getItem('postCode');
+    });
+  </script>
 
 {% endblock %}
 
