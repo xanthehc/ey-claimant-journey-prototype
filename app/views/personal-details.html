@@ -1,4 +1,4 @@
-{% extends "di-govuk-one-login-service-header/layouts/service-header.html" %}
+{% extends "/layouts/one-login.html" %}
 
 {% block pageTitle %}
   {{ serviceName }} – GOV.UK Prototype Kit
@@ -73,7 +73,7 @@
             <label class="govuk-label govuk-date-input__label" for="dob-issued-day">
               Day
             </label>
-            <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="dob-issued-day" name="dob-issued-day" type="text" inputmode="numeric">
+            <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="dob-issued-day" name="dobDay" type="text" inputmode="numeric">
           </div>
         </div>
         <div class="govuk-date-input__item">
@@ -81,7 +81,7 @@
             <label class="govuk-label govuk-date-input__label" for="dob-issued-month">
               Month
             </label>
-            <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="dob-issued-month" name="dob-issued-month" type="text" inputmode="numeric">
+            <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="dob-issued-month" name="dobMonth" type="text" inputmode="numeric">
           </div>
         </div>
         <div class="govuk-date-input__item">
@@ -99,19 +99,19 @@
   <br>
 
   <div class="govuk-form-group">
-    <fieldset class="govuk-fieldset" role="group" aria-describedby="dob-hint">
+    <fieldset class="govuk-fieldset" role="group" aria-describedby="ni-hint">
       <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
         <h1 class="govuk-fieldset__heading">
         What is your National Insurance number?
         </h1>
       </legend>
-      <div id="dob-hint" class="govuk-hint">
+      <div id="ni-hint" class="govuk-hint">
         It’s on your National Insurance card, benefit letter, payslip or P60. For example ‘QQ123456C’.
       </div>
-      <div class="govuk-date-input" id="dob-issued">
+      <div class="govuk-date-input" id="ni-issued">
         <div class="govuk-date-input__item">
             <div class="govuk-form-group">
-                <input class="govuk-input govuk-input--width-10" id="width-10" name="nationalInsuranceNumber" type="text">
+                <input class="govuk-input govuk-input--width-10" id="ni-number" name="nationalInsuranceNumber" type="text">
               </div>
         </div>
 

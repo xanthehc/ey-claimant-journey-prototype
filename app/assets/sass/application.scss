@@ -169,3 +169,45 @@
     cursor: help
 }
 
+@import "node_modules/@x-govuk/govuk-prototype-components/x-govuk/all";
+
+.your-services__card {
+  border: 1px solid #b1b4b6;
+}
+
+.govuk-list > .your-services__card {
+  margin-bottom: 20px;
+}
+
+.your-services__card.your-services__card--empty {
+  margin-bottom: 30px;
+}
+
+.your-services__card__heading {
+  padding: 15px 15px 20px 15px;
+  background-color: #f3f2f1;
+  margin: 0;
+}
+
+.your-services__card__content {
+  padding-top: 15px;
+  padding-right: 15px;
+  padding-left: 15px;
+}
+
+@media (min-width: 40.0625em) {
+  .your-services__card__content {
+    padding-top: 20px;
+  }
+}
+.your-services__card__last-used {
+  color: #505a5f;
+}
+
+.information-box {
+    padding: 30px;
+    margin-top: 10px;
+    margin-bottom: 50px;
+    background: #f3f2f1;
+  }
+  

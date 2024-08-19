@@ -13,13 +13,13 @@ router.post('/email-address-page', (req, res) => {
 		req.body.emailAddress
 	)
 
-	res.redirect('/confirmation-page');
+	res.redirect('/sign-in');
 })
 
 router.post('/email-address', (req, res) => {
 	const notify = new NotifyClient(process.env.NOTIFYAPIKEY);
 	notify.sendEmail(
-		'f6d30fef-01b2-4839-a32d-3912b6949027',
+		'1588cfab-50db-453b-aca6-428a05d159e3',
 		req.body.emailAddress
 	)
 

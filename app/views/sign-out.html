@@ -1,0 +1,31 @@
+{% extends "layouts/main.html" %}
+
+{% block beforeContent %}
+<div class="govuk-phase-banner">
+  <p class="govuk-phase-banner__content">
+    <strong class="govuk-tag govuk-phase-banner__content__tag">
+      PROTOTYPE
+    </strong>
+    <span class="govuk-phase-banner__text">
+      This is not a real service
+  </p>
+</div>
+
+  {{ govukBackLink({
+  text: "Back",
+  href: "javascript:window.history.back()"
+}) }}
+{% endblock %}
+
+{% block content %}
+
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <header class="govuk-heading-l">You have signed out of the early years financial incentive payment service</header>
+    <p>You can return to your claim by signing in to <a href="/one-login-sign-in">GOV.UK One Login again</a> </p>
+    <p>If you have any queries about the service, email <a href="">help@opsteam.com</a></p>
+</div>
+
+{% endblock %}
+
