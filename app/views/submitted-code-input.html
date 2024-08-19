@@ -1,0 +1,50 @@
+{% extends "layouts/main.html" %}
+
+{% block pageTitle %}
+  Content page template – {{ serviceName }} – GOV.UK Prototype Kit
+{% endblock %}
+
+{% block beforeContent %}
+<div class="govuk-phase-banner">
+  <p class="govuk-phase-banner__content">
+    <strong class="govuk-tag govuk-phase-banner__content__tag">
+      PROTOTYPE
+    </strong>
+    <span class="govuk-phase-banner__text">
+      This is not a real service
+  </p>
+</div>
+  {{ govukBackLink({
+    text: "Back",
+    href: "javascript:window.history.back()"
+  }) }}
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+  
+        <h1 class="govuk-heading-l">
+          You have already submitted your claim
+        </h1>
+  
+        <p>The Department for Education is reviewing your application. If approved, you’ll receive the payment in one lump sum.</p>
+
+        <p>After 6 months in your role, we'll check that you’re still working at your organisation. If you are, you’ll receive your payment in 6-8 weeks time. We’ll email you updates on the progress of your application. </p>
+
+        <p>You’ll be informed of the progress of your application after you’ve been in your role for 6 months. You’ll also receive emails to confirm: </p>
+        <ul class="govuk-list govuk-list--bullet">
+          <li>if your application is accepted or rejected</li>
+          <li>when your payment has been made. We’ll give you a full breakdown of how much you have received</li>
+        </ul>
+          
+             
+        <p> If you've got any questions, email us at <a href=>help@opsteam.com</a></p>
+
+
+
+      </div>
+    </div>
+
+{% endblock %}
