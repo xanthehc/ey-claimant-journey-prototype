@@ -19,7 +19,7 @@ router.post('/email-address-page', (req, res) => {
 router.post('/email-address', (req, res) => {
 	const notify = new NotifyClient(process.env.NOTIFYAPIKEY);
 	notify.sendEmail(
-		'1588cfab-50db-453b-aca6-428a05d159e3',
+		'c838bbca-9367-4e24-bfa7-6497772d9a92',
 		req.body.emailAddress
 	)
 
@@ -100,6 +100,37 @@ router.post('/personal-details', function (req, res) {
 // Check answers page GET request
 router.get('/check-answers', function (req, res) {
   res.render('check-answers');
+});
+
+router.post('/email-address', function (req, res) {
+  // Store the email address in the session
+  req.session.data['emailAddress'] = req.body.emailAddress;
+
+  // Redirect to the next page
+  res.redirect('/confirmation');
+});
+
+router.post('/confirmation', function (req, res) {
+  const emailAddress = req.session.data['emailAddress']; // Retrieve the stored email address
+  const templateId = '2774c52b-a2b8-479d-9107-3cad14f46969'; // Your template ID
+
+  // Optional: Add any personalisation data you want to include in the email
+  const personalisation = {};
+
+  notify
+    .sendEmail(templateId, emailAddress, { personalisation })
+    .then(response => {
+      console.log('Email sent successfully:', response);
+
+      // Redirect to a confirmation page or render a success message
+      res.redirect('/confirmation');
+    })
+    .catch(err => {
+      console.error('Error sending email:', err);
+
+      // Handle the error, e.g., show an error page
+      res.redirect('/error');
+    });
 });
 
 
