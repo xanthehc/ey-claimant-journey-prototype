@@ -5,16 +5,18 @@ const NotifyClient = require('notifications-node-client').NotifyClient;
 const govukPrototypeKit = require('govuk-prototype-kit')
 const router = govukPrototypeKit.requests.setupRouter()
 
-
 router.post('/email-address-page', (req, res) => {
-	const notify = new NotifyClient(process.env.NOTIFYAPIKEY);
+  const notify = new NotifyClient(process.env.NOTIFYAPIKEY);
+
+  // Extract the required information from the session data
   const fullName = req.session.data['fullName'];
   const emailAddress = req.session.data['emailAddress'];
   const workPlace = req.session.data['workPlace'];
 
-	notify.sendEmail(
-		'f6d30fef-01b2-4839-a32d-3912b6949027',
-		req.body.emailAddress,
+  // Send the first email immediately
+  notify.sendEmail(
+    'f6d30fef-01b2-4839-a32d-3912b6949027', // First template ID
+    emailAddress,
     {
       personalisation: {
         'full_name': fullName,
@@ -22,10 +24,34 @@ router.post('/email-address-page', (req, res) => {
         'claim_reference': 'HDJ2123F'
       }
     }
-  )
+  ).then(() => {
+    console.log('First email sent successfully');
+  }).catch(err => {
+    console.error('Error sending first email:', err);
+  });
 
-	res.redirect('/sign-in');
-})
+  // Schedule the second email to be sent 2 minutes later
+  setTimeout(() => {
+    notify.sendEmail(
+      'bf909103-0f2e-4eba-ab19-27e9af1c9ffa', // Second template ID
+      emailAddress,
+      {
+        personalisation: {
+          'full_name': fullName,
+          'setting_name': workPlace,
+          'claim_reference': 'HDJ2123F'
+        }
+      }
+    ).then(() => {
+      console.log('Second email sent successfully');
+    }).catch(err => {
+      console.error('Error sending second email:', err);
+    });
+  }, 8000); // 2 minutes in milliseconds
+
+  // Redirect the user to the sign-in page once (immediately)
+  res.redirect('/sign-in');
+});
 
 router.post('/email-address', (req, res) => {
 	const notify = new NotifyClient(process.env.NOTIFYAPIKEY);
