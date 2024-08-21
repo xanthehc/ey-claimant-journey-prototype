@@ -8,20 +8,42 @@ const router = govukPrototypeKit.requests.setupRouter()
 
 router.post('/email-address-page', (req, res) => {
 	const notify = new NotifyClient(process.env.NOTIFYAPIKEY);
+  const firstName = req.session.data['firstName'];
+  const lastName = req.session.data['lastName'];
+  const emailAddress = req.session.data['emailAddress'];
 	notify.sendEmail(
 		'f6d30fef-01b2-4839-a32d-3912b6949027',
-		req.body.emailAddress
-	)
+		req.body.emailAddress,
+    {
+      personalisation: {
+        'first_name': firstName,
+        'last_name': lastName,
+        'setting_name': 'Tiny Tots Day Nursery',
+        'claim_reference': 'HDJ2123F'
+      }
+    }
+  )
 
 	res.redirect('/sign-in');
 })
 
 router.post('/email-address', (req, res) => {
 	const notify = new NotifyClient(process.env.NOTIFYAPIKEY);
-	notify.sendEmail(
+  const firstName = req.session.data['firstName'];
+  const lastName = req.session.data['lastName'];
+  const emailAddress = req.session.data['emailAddress'];
+	
+  notify.sendEmail(
 		'c838bbca-9367-4e24-bfa7-6497772d9a92',
-		req.body.emailAddress
-	)
+		req.body.emailAddress,
+    {
+      personalisation: {
+        'first_name': firstName,
+        'last_name': lastName,
+        'one_time_password': '300241'
+      }
+    }
+  )
 
 	res.redirect('/email-otp');
 })
@@ -53,6 +75,8 @@ const notify = new NotifyClient(process.env.NOTIFYAPIKEY);
 
 router.post('/mobile-number-input', (req, res) => {
   const mobileNumber = req.body.mobileInput;
+  const firstName = req.session.data['firstName'];
+  const lastName = req.session.data['lastName'];
 
   if (!mobileNumber) {
     // Handle case where mobile number is missing
@@ -61,25 +85,27 @@ router.post('/mobile-number-input', (req, res) => {
 
   // Send the SMS via Notify
   notify.sendSms(
-    '45e73a8a-0ee1-4f3d-a8e8-59bd4d0a76a2', // Replace with your template ID
+    '45e73a8a-0ee1-4f3d-a8e8-59bd4d0a76a2', 
     mobileNumber,
     {
       personalisation: {
-        // Add any personalisation if needed
+        'first_name': firstName,
+        'last_name': lastName,
+        'one_time_password': '300241' 
       }
     }
   )
-  .then(() => {
-    // Redirect to the confirmation page after SMS is sent
+  .then(() => { 
     res.redirect('/mobile-number-otp');
   })
   .catch((err) => {
     console.error('Error sending SMS:', err);
-    // Handle error, e.g., redirect to an error page or show an error message
     res.status(500).send('Failed to send SMS. Please try again later.');
   });
 });
 
+
+  
 router.post('/handle-redirect', function(req, res) {
   if (req.body.action === 'confirm') {
       res.redirect('/bank-account-select');
@@ -111,11 +137,18 @@ router.post('/email-address', function (req, res) {
 });
 
 router.post('/confirmation', function (req, res) {
-  const emailAddress = req.session.data['emailAddress']; // Retrieve the stored email address
-  const templateId = '2774c52b-a2b8-479d-9107-3cad14f46969'; // Your template ID
+  const emailAddress = req.session.data['emailAddress']; 
+  const templateId = '2774c52b-a2b8-479d-9107-3cad14f46969'; 
+  const notify = new NotifyClient(process.env.NOTIFYAPIKEY);
+  const firstName = req.session.data['firstName'];
+  const lastName = req.session.data['lastName'];
 
-  // Optional: Add any personalisation data you want to include in the email
-  const personalisation = {};
+
+  const personalisation = {
+    'first_name': firstName,
+    'last_name': lastName,
+    'claim_reference': "HDJ2123F"
+  };
 
   notify
     .sendEmail(templateId, emailAddress, { personalisation })
