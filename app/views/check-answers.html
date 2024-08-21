@@ -78,10 +78,7 @@
             <dt class="govuk-summary-list__key">
               Home address
             </dt>
-            <dd class="govuk-summary-list__value">
-             <p> {{ data['houseNumberOrName'] }} {{ data['buildingAndStreet'] }}  {{ data['postCode'] }} </p>
-             <p> {{ data['townOrCity'] }} </p> 
-             <p> {{ data['countyName'] }} </p>
+            <dd class="govuk-summary-list__value" id="home-address-value">
             </dd>
             <dd class="govuk-summary-list__actions">
               <a class="govuk-link" href="/enter-home-address">Change<span class="govuk-visually-hidden"> date of birth</span></a>
@@ -185,13 +182,25 @@
   <script>
     document.addEventListener('DOMContentLoaded', function() {
       // Retrieve values from sessionStorage
-      document.getElementById('house-number-or-name-value').textContent = sessionStorage.getItem('houseNumberOrName');
-      document.getElementById('building-and-street-value').textContent = sessionStorage.getItem('buildingAndStreet');
-      document.getElementById('town-or-city-value').textContent = sessionStorage.getItem('townOrCity');
-      document.getElementById('county-value').textContent = sessionStorage.getItem('county');
-      document.getElementById('post-code-value').textContent = sessionStorage.getItem('postCode');
+      var houseNumberOrName = sessionStorage.getItem('houseNumberOrName') || '';
+      var buildingAndStreet = sessionStorage.getItem('buildingAndStreet') || '';
+      var postCode = sessionStorage.getItem('postCode') || '';
+      var townOrCity = sessionStorage.getItem('townOrCity') || '';
+      var county = sessionStorage.getItem('county') || '';
+
+      // Construct the address format
+      var addressHtml = `
+        <p>${houseNumberOrName} ${buildingAndStreet} ${postCode}</p>
+        <p>${townOrCity}</p>
+        <p>${county}</p>
+      `;
+
+      // Insert the formatted address into the dd element
+      document.getElementById('home-address-value').innerHTML = addressHtml;
     });
   </script>
+  
+  
 
 {% endblock %}
 

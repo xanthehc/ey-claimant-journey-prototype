@@ -53,7 +53,8 @@
     
       {{ govukButton({
         text: "Continue",
-        href: "email-address"
+        href: "email-address",
+        id: "continue-button"
       }) }}
 
       <script>
@@ -72,7 +73,7 @@
           sessionStorage.setItem('postCode', postCode);
   
           // Redirect to the next page
-          window.location.href = 'check-answers';
+          window.location.href = 'payroll-gender';
         });
       </script>
 
