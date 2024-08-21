@@ -19,20 +19,58 @@
 
 {% block content %}
 
-
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
+
+<div class="govuk-notification-banner govuk-notification-banner--journey-options" role="region" aria-labelledby="govuk-notification-banner-title" data-module="govuk-notification-banner">
+  <div class="govuk-notification-banner__header govuk-notification-banner__header--journey-options">
+    <h2 class="govuk-notification-banner__title govuk-notification-banner__title--journey_options" id="govuk-notification-banner-title">
+      Enter your information
+    </h2>
+  </div>
+  <div class="govuk-notification-banner__content">
+    <p class="govuk-notification-banner__body">
+      This will only be used to make the prototype feel as realistic as possible. We will not use any of the information you provide in this prototype to contact you in the future. Your data will be stored for up to 5 days and then fully deleted.
+    </p>
+  </div>
+</div>
+
+
     <form class="form" id="email-form" method="post"> 
       {{ govukInput({
         label: {
-          text: "Enter your email address",
-          classes: "govuk-label--l",
+          text: "Email address",
+          classes: "body",
           isPageHeading: true
         },
         id: "email-address",
         name: "emailAddress",
         type: "email",
         autocomplete: "email",
+        spellcheck: false
+      }) }}
+
+      {{ govukInput({
+        label: {
+          text: "Full name",
+          classes: "body",
+          isPageHeading: true
+        },
+        id: "full-name",
+        name: "fullName",
+        type: "name",
+        autocomplete: "name",
+        spellcheck: false
+      }) }}
+
+      {{ govukInput({
+        label: {
+          text: "Your workplace",
+          classes: "body",
+          isPageHeading: true
+        },
+        id: "work-place",
+        name: "workPlace",
         spellcheck: false
       }) }}
 

@@ -8,17 +8,17 @@ const router = govukPrototypeKit.requests.setupRouter()
 
 router.post('/email-address-page', (req, res) => {
 	const notify = new NotifyClient(process.env.NOTIFYAPIKEY);
-  const firstName = req.session.data['firstName'];
-  const lastName = req.session.data['lastName'];
+  const fullName = req.session.data['fullName'];
   const emailAddress = req.session.data['emailAddress'];
+  const workPlace = req.session.data['workPlace'];
+
 	notify.sendEmail(
 		'f6d30fef-01b2-4839-a32d-3912b6949027',
 		req.body.emailAddress,
     {
       personalisation: {
-        'first_name': firstName,
-        'last_name': lastName,
-        'setting_name': 'Tiny Tots Day Nursery',
+        'full_name': fullName,
+        'setting_name': workPlace,
         'claim_reference': 'HDJ2123F'
       }
     }
@@ -142,12 +142,14 @@ router.post('/confirmation', function (req, res) {
   const notify = new NotifyClient(process.env.NOTIFYAPIKEY);
   const firstName = req.session.data['firstName'];
   const lastName = req.session.data['lastName'];
+  const workPlace = req.session.data['workPlace'];
 
 
   const personalisation = {
     'first_name': firstName,
     'last_name': lastName,
-    'claim_reference': "HDJ2123F"
+    'claim_reference': "HDJ2123F",
+    'setting_name': workPlace
   };
 
   notify
@@ -162,7 +164,7 @@ router.post('/confirmation', function (req, res) {
       console.error('Error sending email:', err);
 
       // Handle the error, e.g., show an error page
-      res.redirect('/error');
+      res.redirect('/confirmation');
     });
 });
 
