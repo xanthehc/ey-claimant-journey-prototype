@@ -9,6 +9,13 @@
   {{ govukHeader() }}
 {% endblock %}
 
+{% block pageScripts %}
+  <script type="text/javascript">
+    var $element = document.querySelector('#step-by-step-navigation')
+    var stepByStepNavigation = new GOVUK.Modules.AppStepNav($element).init()
+  </script>
+{% endblock %}
+
 {% block beforeContent %}
 <div class="govuk-phase-banner">
   <p class="govuk-phase-banner__content">
@@ -33,8 +40,8 @@
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
 
-      <h2 class="govuk-heading-m">
-        What is the early years financial incentive?
+      <!-- <h2 class="govuk-heading-m">
+        What is the early years financial incentive
       </h2>
 
       <p>The early years financial incentive is a new scheme to support nurseries with hiring new practitioners.</p>
@@ -50,19 +57,7 @@
       <p>
         Most people who are new to working in early years or are returning to the profession can receive the £1000 payment. Some extra eligibility criteria will apply depending on their role and previous experience.</p>
       
-        <h2 class="govuk-heading-m">
-          What happens before the recruitment stage?
-        </h2>
-
-      <p>The local authority will have a set number of financial incentives that these nurseries can use to recruit new staff.</p>
-
-        <p>They will also be directed to guidance explaining that they will need to use a digital service to submit claims for payment on behalf of new practitioners. They will be directed to a link to this service.</p>
-
-        <p>Nurseries will provide an email address to their local authority to be used to log in to the digital service.</p>
-
-        <h2 class="govuk-heading-m">
-          How will the payment process work?
-        </h2>
+        
       
         <p>When a practitioner has been recruited for a role with an incentive attached, the nursery will use the digital service to submit a claim for the £1000 payment on the practitioner’s behalf.</p> 
         
@@ -71,10 +66,137 @@
         <p>The practitioner will then receive the one-off £1000 payment after they have been in the role for 6 months. This will be paid directly to the practitioner by the Department for Education.</p>
         
         <img src="/public/images/Timeline/new.jpg" style="width: 100%; height: auto;" alt="timeline of claim payments">
+      -->
 
-    </div>
+       
+        <h1 class="govuk-heading-l">
+          Early years financial incentive
+        </h1>
 
-  
+        <p>The early years financial incentive is a new scheme to support nurseries with hiring new practitioners.</p>
+        <p>It will enable some nurseries to advertise jobs with a £1000 sign-on bonus attached.</p>
+        <p>The bonus payment is paid to eligible practitioners after they've completed 6 months in their job.</p>
+      
+          
+            <div data-module="appstepnav"id="step-by-step-navigation" class="app-step-nav js-hidden app-step-nav--large" data-show-text="Show" data-hide-text="Hide" data-show-all-text="Show all steps" data-hide-all-text="Hide all steps">
+              <ol class="app-step-nav__steps">
+                <li class="app-step-nav__step js-step" id="allocation">
+                  
+                    <h2 class="app-step-nav__title">
+                      <span class="app-step-nav__circle app-step-nav__circle--number">
+                        <span class="app-step-nav__circle-inner">
+                          <span class="app-step-nav__circle-background">
+                            <span class="govuk-visually-hidden govuk-!-display-none-print">Step</span> 1<span class="govuk-visually-hidden govuk-!-display-none-print" aria-hidden="true">:</span>
+                          </span>
+                        </span>
+                      </span>
+        
+                      <span class="js-step-title">
+                        Allocation
+                      </span>
+                    </h2>
+                   
+                  <p>The local authority (LA) will have a set number of financial incentives that eligible nurseries can use to recruit permanent staff.</p>
+                  <p>The nursery works with the LA to obtain these incentive payments, so that they can use them to attract new practitioners.</p>
+                  
+                                           
+                </li>
+        
+                <li class="app-step-nav__step js-step" id="recruitment">
+                  
+                    <h2 class="app-step-nav__title">
+                      <span class="app-step-nav__circle app-step-nav__circle--number">
+                        <span class="app-step-nav__circle-inner">
+                          <span class="app-step-nav__circle-background">
+                            <span class="govuk-visually-hidden govuk-!-display-none-print">Step</span> 2<span class="govuk-visually-hidden govuk-!-display-none-print" aria-hidden="true">:</span>
+                          </span>
+                        </span>
+                      </span>
+        
+                      <span class="js-step-title">
+                        Recruitment
+                      </span>
+                    </h2>
+                  <p>The nursery advertises an early years practitioner role, with a bonus payment attached.</p>
+                  <p>Anyone can apply for the role. Applicants do not need to have worked or have experience in a nursery or early years setting to apply.</p>
+                  <p>Applicants are interviewed. Succesful applicants are told that a claim for the bonus payment will be started on their behalf.</p>
+                      
+                </li>
+
+                <li class="app-step-nav__step js-step" id="nursery-starts-claim">
+                  
+                  <h2 class="app-step-nav__title">
+                    <span class="app-step-nav__circle app-step-nav__circle--number">
+                      <span class="app-step-nav__circle-inner">
+                        <span class="app-step-nav__circle-background">
+                          <span class="govuk-visually-hidden govuk-!-display-none-print">Step</span> 3<span class="govuk-visually-hidden govuk-!-display-none-print" aria-hidden="true">:</span>
+                        </span>
+                      </span>
+                    </span>
+      
+                    <span class="js-step-title">
+                      Nursery starts claim
+                    </span>
+                  </h2>
+                <p>After the practitioner has started the role, the nursery starts a claim on behalf of the practitioner. They do this using an online claim service.</p>
+                <p>When they've done this, an email is sent automatically to the practitioner. The email contains a link and claim reference number, and the practitioner is invited to the complete the claim online.</p>
+                 
+                                   
+              </li>
+      
+        
+                <li class="app-step-nav__step js-step" id="practitioner completes claim">
+                  
+                    <h2 class="app-step-nav__title">
+                      <span class="app-step-nav__circle app-step-nav__circle--number">
+                        <span class="app-step-nav__circle-inner">
+                          <span class="app-step-nav__circle-background">
+                              <span class="govuk-visually-hidden govuk-!-display-none-print">Step</span> 4<span class="govuk-visually-hidden govuk-!-display-none-print" aria-hidden="true">:</span>
+                          </span>
+                        </span>
+                      </span>
+        
+                      <span class="js-step-title">
+                        Practitioner  completes claim
+                      </span>
+                    </h2>
+
+                    <p>The practitioner completes the claim using the online claim service. As part of this process, the practitioner will need to sign in to GOV.UK One Login or create an account and prove their identity if they don't already have one.</p>
+                    <p>When the claim is complete, a confirmation email is sent to the practitioner with the next steps. The nursery also gets an email confirming that the claim is complete.</p>
+                    
+                       
+        
+                </li>
+
+                <li class="app-step-nav__step js-step" id="payment">
+                  
+                  <h2 class="app-step-nav__title">
+                    <span class="app-step-nav__circle app-step-nav__circle--number">
+                      <span class="app-step-nav__circle-inner">
+                        <span class="app-step-nav__circle-background">
+                            <span class="govuk-visually-hidden govuk-!-display-none-print">Step</span> 5<span class="govuk-visually-hidden govuk-!-display-none-print" aria-hidden="true">:</span>
+                        </span>
+                      </span>
+                    </span>
+      
+                    <span class="js-step-title">
+                      Payment
+                    </span>
+                  </h2>
+
+                  <p>After 6 months, the Department for Education will check with the nursery that the practitioner is still working for them.</p>
+                  <p>If they are, the full bonus payment will be paid into their bank account.</p>
+                                       
+      
+              </li>
+                        
+                              
+              </ol>
+            </div>
+                        
+    </div>  
   </div>
+
+ 
 
 {% endblock %}
