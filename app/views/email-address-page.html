@@ -1,43 +1,26 @@
 {% extends "layouts/main.html" %}
 
-{% block beforeContent %}
-<div class="govuk-phase-banner">
-  <p class="govuk-phase-banner__content">
-    <strong class="govuk-tag govuk-phase-banner__content__tag">
-      PROTOTYPE
-    </strong>
-    <span class="govuk-phase-banner__text">
-      This is not a real service
-  </p>
-</div>
-
-  {{ govukBackLink({
-  text: "Back",
-  href: "javascript:window.history.back()"
-}) }}
-{% endblock %}
-
 {% block content %}
-
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
+    <form class="form" id="email-form" method="post" action="/email-address-page">
 
+      <!-- Email Address Field with Error Handling -->
+      <div id="email-address-group" class="govuk-form-group {% if error %}govuk-form-group--error{% endif %}">
+        <h1 class="govuk-label-wrapper">
+          <label class="govuk-label govuk-body" for="email-address">
+            Email address
+          </label>
+        </h1>
+        {% if error %}
+        <p id="email-address-error" class="govuk-error-message">
+          <span class="govuk-visually-hidden">Error:</span> {{ error }}
+        </p>
+        {% endif %}
+        <input class="govuk-input {% if error %}govuk-input--error{% endif %}" id="email-address" name="emailAddress" type="email" autocomplete="email" spellcheck="false" value="{{ emailAddress }}">
+      </div>
 
-
-    <form class="form" id="email-form" method="post"> 
-      {{ govukInput({
-        label: {
-          text: "Email address",
-          classes: "body",
-          isPageHeading: true
-        },
-        id: "email-address",
-        name: "emailAddress",
-        type: "email",
-        autocomplete: "email",
-        spellcheck: false
-      }) }}
-
+      <!-- Full Name Field -->
       {{ govukInput({
         label: {
           text: "Full name",
@@ -46,11 +29,13 @@
         },
         id: "full-name",
         name: "fullName",
-        type: "name",
+        type: "text",
         autocomplete: "name",
-        spellcheck: false
+        spellcheck: false,
+        value: fullName
       }) }}
 
+      <!-- Workplace Field -->
       {{ govukInput({
         label: {
           text: "Your workplace",
@@ -59,9 +44,11 @@
         },
         id: "work-place",
         name: "workPlace",
-        spellcheck: false
+        spellcheck: false,
+        value: workPlace
       }) }}
 
+      <!-- Submit Button -->
       {{ govukButton({
         text: "Submit",
         id: "submit-button"
@@ -69,20 +56,4 @@
     </form>
   </div>
 </div>
-
 {% endblock %}
-
-<script>
-
-const sendEmail = require('./test'); // Import the sendEmail function
-
-  document.getElementById('emailForm').addEventListener('submit', function(event) {
-      event.preventDefault(); // Prevent default form submission
-      
-      const email = document.getElementById('email').value; // Get user input email
-      
-      // Call sendEmail function with the user input email
-      sendEmail(email);
-  });
-
-  </script>

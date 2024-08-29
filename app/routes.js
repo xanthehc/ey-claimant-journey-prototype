@@ -5,17 +5,27 @@ const NotifyClient = require('notifications-node-client').NotifyClient;
 const govukPrototypeKit = require('govuk-prototype-kit')
 const router = govukPrototypeKit.requests.setupRouter()
 
+
 router.post('/email-address-page', (req, res) => {
-  const notify = new NotifyClient(process.env.NOTIFYAPIKEY);
-
-
+  // Get form data from the session
   const fullName = req.session.data['fullName'];
   const emailAddress = req.session.data['emailAddress'];
   const workPlace = req.session.data['workPlace'];
 
+  // Server-side validation for emailAddress
+  if (!emailAddress || emailAddress.trim() === '') {
+    // If email is missing, render the form again with an error message
+    return res.render('email-address-page', {
+      error: 'Enter your email address', // Pass the error message to the template
+      fullName: fullName,
+      emailAddress: emailAddress,
+      workPlace: workPlace
+    });
+  }
+
   // Send the first email immediately
   notify.sendEmail(
-    'f6d30fef-01b2-4839-a32d-3912b6949027', 
+    'f6d30fef-01b2-4839-a32d-3912b6949027',
     emailAddress,
     {
       personalisation: {
@@ -30,10 +40,10 @@ router.post('/email-address-page', (req, res) => {
     console.error('Error sending first email:', err);
   });
 
-  // Second email to be sent 5 minutes later
+  // Schedule the second email to be sent 5 minutes later
   setTimeout(() => {
     notify.sendEmail(
-      'bf909103-0f2e-4eba-ab19-27e9af1c9ffa', 
+      'bf909103-0f2e-4eba-ab19-27e9af1c9ffa',
       emailAddress,
       {
         personalisation: {
@@ -47,11 +57,12 @@ router.post('/email-address-page', (req, res) => {
     }).catch(err => {
       console.error('Error sending second email:', err);
     });
-  }, 300000); 
+  }, 300000);
 
-  
+  // Redirect to the next page if no errors
   res.redirect('/sign-in');
 });
+
 
 router.post('/email-address', (req, res) => {
 	const notify = new NotifyClient(process.env.NOTIFYAPIKEY);
