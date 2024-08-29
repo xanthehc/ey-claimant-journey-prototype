@@ -8,14 +8,14 @@ const router = govukPrototypeKit.requests.setupRouter()
 router.post('/email-address-page', (req, res) => {
   const notify = new NotifyClient(process.env.NOTIFYAPIKEY);
 
-  // Extract the required information from the session data
+
   const fullName = req.session.data['fullName'];
   const emailAddress = req.session.data['emailAddress'];
   const workPlace = req.session.data['workPlace'];
 
   // Send the first email immediately
   notify.sendEmail(
-    'f6d30fef-01b2-4839-a32d-3912b6949027', // First template ID
+    'f6d30fef-01b2-4839-a32d-3912b6949027', 
     emailAddress,
     {
       personalisation: {
@@ -30,10 +30,10 @@ router.post('/email-address-page', (req, res) => {
     console.error('Error sending first email:', err);
   });
 
-  // Schedule the second email to be sent 2 minutes later
+  // Second email to be sent 5 minutes later
   setTimeout(() => {
     notify.sendEmail(
-      'bf909103-0f2e-4eba-ab19-27e9af1c9ffa', // Second template ID
+      'bf909103-0f2e-4eba-ab19-27e9af1c9ffa', 
       emailAddress,
       {
         personalisation: {
@@ -47,9 +47,9 @@ router.post('/email-address-page', (req, res) => {
     }).catch(err => {
       console.error('Error sending second email:', err);
     });
-  }, 8000); // 2 minutes in milliseconds
+  }, 300000); 
 
-  // Redirect the user to the sign-in page once (immediately)
+  
   res.redirect('/sign-in');
 });
 

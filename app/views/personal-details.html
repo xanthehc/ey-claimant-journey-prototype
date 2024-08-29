@@ -44,10 +44,13 @@
         </p>
         <input class="govuk-input" id="first-name" name="firstName" type="text" value="{{ data['first-name'] }}" autocomplete="first-name">
       </div>
-      <div id="first-name-group" class="govuk-form-group">
+     
+      <div id="middle-name-group" class="govuk-form-group">
         <label class="govuk-label" for="middle-name">
           Middle names
         </label>
+        <p id="middle-name-error" class="govuk-error-message" style="display: none;">
+          <span class="govuk-visually-hidden">Error:</span> Enter employee's middle name
         </p>
         <input class="govuk-input" id="middle-name" name="middleName" type="text" value="{{ data['middle-name'] }}" autocomplete="middle-name">
       </div>
@@ -136,29 +139,3 @@
 
 {% endblock %}
 
-
-{% block footer %}
-{{ govukFooter({
-  meta: {
-    items: [
-      {
-        href: "/manage-prototype",
-        text: "Manage your prototype"
-      },
-      {
-       href: "/sign-in",
-       text: "Skip sign in"
-     },
-     {
-       href: "/one-login-idv-fail",
-       text: "IDV fail"
-     },
-      {
-        href: "/manage-prototype/clear-data",
-        text: "Clear data"
-      }
-    ],
-    visuallyHiddenTitle: "Footer links"
-  }
-}) }}
-{% endblock %}

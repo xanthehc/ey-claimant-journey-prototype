@@ -1,4 +1,4 @@
-{% extends "/layouts/one-login" %}
+{% extends "/layouts/one-login.html" %}
 
 {% block pageTitle %}
   {{ serviceName }} – GOV.UK Prototype Kit
@@ -46,28 +46,3 @@
 {% endblock %}
 
 
-{% block footer %}
-{{ govukFooter({
-  meta: {
-    items: [
-      {
-        href: "/manage-prototype",
-        text: "Manage your prototype"
-      },
-      {
-       href: "/sign-in",
-       text: "Skip sign in"
-     },
-     {
-       href: "/one-login-idv-fail",
-       text: "IDV fail"
-     },
-      {
-        href: "/manage-prototype/clear-data",
-        text: "Clear data"
-      }
-    ],
-    visuallyHiddenTitle: "Footer links"
-  }
-}) }}
-{% endblock %}

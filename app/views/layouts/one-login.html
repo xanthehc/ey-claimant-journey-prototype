@@ -1,8 +1,13 @@
+{% extends "govuk-prototype-kit/layouts/govuk-branded.njk" %}
 
- {% extends "govuk-prototype-kit/layouts/govuk-branded.njk" %}
+{% block stylesheets %}
+  {{ super() }}
+  <link href="app/assets/css/application.css" rel="stylesheet" type="text/css" />
+{% endblock %}
     
- {% block header %}
- <header class="cross-service-header" role="banner" data-module="one-login-header">
+{% block header %}
+
+<header class="cross-service-header" role="banner" data-module="one-login-header">
   <div class="one-login-header" data-one-login-header-nav>
     <div class="one-login-header__container govuk-width-container">
       <div class="one-login-header__logo">
@@ -129,43 +134,53 @@
   </div>
   <!-- End of service navigation -->
 
- {% endblock %}
 
-      {% block beforeContent %}
-      <div class="govuk-phase-banner">
-        <p class="govuk-phase-banner__content">
-          <strong class="govuk-tag govuk-phase-banner__content__tag">
-            PROTOTYPE
-          </strong>
-          <span class="govuk-phase-banner__text">
-            This is not a real service
-        </p>
-      </div>
-    
-    {% endblock %}
-    
-    {% block footer %}
-     {{ govukFooter({
-       meta: {
-         items: [
-           {
-             href: "/manage-prototype",
-             text: "Manage your prototype"
-           },
-           {
-            href: "/sign-in",
-            text: "Skip sign in"
-          },
-          {
-            href: "/one-login-idv-fail",
-            text: "IDV fail"
-          },
-           {
-             href: "/manage-prototype/clear-data",
-             text: "Clear data"
-           }
-         ],
-         visuallyHiddenTitle: "Footer links"
-       }
-     }) }}
-    {% endblock %}
+
+{% endblock %}
+
+     {% block beforeContent %}
+     <div class="govuk-phase-banner">
+       <p class="govuk-phase-banner__content">
+         <strong class="govuk-tag govuk-phase-banner__content__tag">
+           PROTOTYPE
+         </strong>
+         <span class="govuk-phase-banner__text">
+           This is not a real service
+       </p>
+     </div>
+   
+   {% endblock %}
+   
+   {% block footer %}
+   {{ govukFooter({
+     meta: {
+       items: [
+         {
+           href: "/manage-prototype",
+           text: "Manage your prototype"
+         },
+         {
+          href: "/policy",
+          text: "Policy context"
+        },
+        {
+          href: "/one-login-sign-in",
+          text: "Skip sign in"
+        },
+        {
+          href: "/fully-submit-application-page",
+          text: "Sign in again shortcut"
+        },
+        {
+          href: "/one-login-idv-fail",
+          text: "IDV fail shortcut"
+        },
+         {
+           href: "/manage-prototype/clear-data",
+           text: "Clear data"
+         }
+       ],
+       visuallyHiddenTitle: "Footer links"
+     }
+   }) }}
+  {% endblock %}

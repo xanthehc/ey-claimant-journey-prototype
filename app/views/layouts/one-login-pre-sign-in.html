@@ -44,27 +44,35 @@
    {% endblock %}
    
    {% block footer %}
-    {{ govukFooter({
-      meta: {
-        items: [
-          {
-            href: "/manage-prototype",
-            text: "Manage your prototype"
-          },
-          {
-           href: "/sign-in",
-           text: "Skip sign in"
+   {{ govukFooter({
+     meta: {
+       items: [
+         {
+           href: "/manage-prototype",
+           text: "Manage your prototype"
          },
          {
-           href: "/one-login-idv-fail",
-           text: "IDV fail"
-         },
-          {
-            href: "/manage-prototype/clear-data",
-            text: "Clear data"
-          }
-        ],
-        visuallyHiddenTitle: "Footer links"
-      }
-    }) }}
-   {% endblock %}
+          href: "/policy",
+          text: "Policy context"
+        },
+        {
+          href: "/one-login-sign-in",
+          text: "Skip sign in"
+        },
+        {
+          href: "/fully-submit-application-page",
+          text: "Sign in again shortcut"
+        },
+        {
+          href: "/one-login-idv-fail",
+          text: "IDV fail shortcut"
+        },
+         {
+           href: "/manage-prototype/clear-data",
+           text: "Clear data"
+         }
+       ],
+       visuallyHiddenTitle: "Footer links"
+     }
+   }) }}
+  {% endblock %}
