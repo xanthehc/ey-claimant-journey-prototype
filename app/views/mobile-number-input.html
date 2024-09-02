@@ -34,13 +34,20 @@
         We'll check the number by sending a text message with a passcode.
       </div>
 
-      {{ govukInput({
-        id: "mobileNumber",
-        name: "mobileInput",
-        type: "text",
-        spellcheck: false,
-        required: true
-      }) }}
+      <!-- Mobile Number Field with Error Handling -->
+      <div id="mobile-number-group" class="govuk-form-group {% if error %}govuk-form-group--error{% endif %}">
+        {% if error %}
+        <p id="mobile-number-error" class="govuk-error-message">
+          <span class="govuk-visually-hidden">Error:</span> {{ error }}
+        </p>
+        {% endif %}
+        <input class="govuk-input {% if error %}govuk-input--error{% endif %}" 
+               id="mobileNumber" 
+               name="mobileInput" 
+               type="text" 
+               spellcheck="false" 
+               value="{{ mobileNumber }}">
+      </div>
 
       {{ govukButton({
         text: "Continue",
@@ -50,6 +57,7 @@
   </div>
 </div>
 {% endblock %}
+
 
 <script>
 

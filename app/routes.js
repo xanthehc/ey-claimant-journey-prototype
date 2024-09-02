@@ -130,27 +130,31 @@ router.post('/mobile-number-input', (req, res) => {
   const firstName = req.session.data['firstName'];
   const lastName = req.session.data['lastName'];
 
-  if (!mobileNumber) {
-    // Handle case where mobile number is missing
-    return res.status(400).send('Mobile number is required.');
+  // Server-side validation for the mobile number
+  if (!mobileNumber || mobileNumber.trim() === '') {
+    // Render the page with an error message if the mobile number is missing
+    return res.render('mobile-number-input', {
+      error: 'Enter your mobile number',
+      mobileNumber,  // Retain the entered value
+      firstName,
+      lastName
+    });
   }
 
-  // Send the SMS via Notify
+  // Proceed with sending the SMS if validation passes
   notify.sendSms(
-    '45e73a8a-0ee1-4f3d-a8e8-59bd4d0a76a2', 
+    '45e73a8a-0ee1-4f3d-a8e8-59bd4d0a76a2',
     mobileNumber,
     {
       personalisation: {
         'first_name': firstName,
         'last_name': lastName,
-        'one_time_password': '300241' 
+        'one_time_password': '300241'
       }
     }
-  )
-  .then(() => { 
+  ).then(() => {
     res.redirect('/mobile-number-otp');
-  })
-  .catch((err) => {
+  }).catch((err) => {
     console.error('Error sending SMS:', err);
     res.status(500).send('Failed to send SMS. Please try again later.');
   });
