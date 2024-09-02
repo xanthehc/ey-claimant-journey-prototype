@@ -65,14 +65,25 @@ router.post('/email-address-page', (req, res) => {
 
 
 router.post('/email-address', (req, res) => {
-	const notify = new NotifyClient(process.env.NOTIFYAPIKEY);
   const firstName = req.session.data['firstName'];
   const lastName = req.session.data['lastName'];
-  const emailAddress = req.session.data['emailAddress'];
-	
+  const emailAddress = req.session.data['emailAddress'] || req.body.emailAddress; // Fetch the email address correctly
+
+  // Server-side validation for the email address
+  if (!emailAddress || emailAddress.trim() === '') {
+    // Render the page with an error message if the email is missing
+    return res.render('email-address', {
+      error: 'Enter your email address',
+      firstName,
+      lastName,
+      emailAddress
+    });
+  }
+
+  // Proceed with sending the email if validation passes
   notify.sendEmail(
-		'c838bbca-9367-4e24-bfa7-6497772d9a92',
-		req.body.emailAddress,
+    'c838bbca-9367-4e24-bfa7-6497772d9a92',
+    emailAddress,
     {
       personalisation: {
         'first_name': firstName,
@@ -80,10 +91,14 @@ router.post('/email-address', (req, res) => {
         'one_time_password': '300241'
       }
     }
-  )
+  ).then(() => {
+    console.log('Email sent successfully');
+  }).catch(err => {
+    console.error('Error sending email:', err);
+  });
 
-	res.redirect('/email-otp');
-})
+  res.redirect('/email-otp');
+});
 
 router.post('/handle-confirm', function(req, res) {
   if (req.body.action === 'confirm') {
