@@ -2,7 +2,6 @@
 
 {% block pageTitle %}
   {{ serviceName }} – GOV.UK Prototype Kit
-  
 {% endblock %}
 
 {% block beforeContent %}
@@ -13,6 +12,7 @@
     </strong>
     <span class="govuk-phase-banner__text">
       This is not a real service
+    </span>
   </p>
 </div>
 {{ govukBackLink({
@@ -23,61 +23,122 @@
 
 {% block content %}
 
+<form id="bank-account-form" action="/payroll-gender" method="POST">
+
+
+<!-- Error Summary -->
+<div id="error-summary" class="govuk-error-summary" data-module="govuk-error-summary" style="display: none;">
+  <div role="alert">
+    <h2 class="govuk-error-summary__title">There is a problem</h2>
+    <div class="govuk-error-summary__body">
+      <ul class="govuk-list govuk-error-summary__list" id="error-list">
+        <!-- Error items will be inserted here dynamically -->
+      </ul>
+    </div>
+  </div>
+</div>
 
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
+    <h1 class="govuk-heading-l">Your personal bank account details</h1>
 
-  
+    <!-- Bank Account Name -->
+    <div id="bank-account-name-group" class="govuk-form-group">
+      <label class="govuk-label" for="bank-account-name">Name on the account</label>
+      <p id="bank-account-name-error" class="govuk-error-message" style="display: none;">
+        <span class="govuk-visually-hidden">Error:</span> Enter a valid name on the account.
+      </p>
+      <div id="bank-account-name-hint" class="govuk-hint">
+        The name as it appears on your bank card or bank statements
+      </div>
+      <input class="govuk-input" id="bank-account-name" name="bankAccountName" type="text" spellcheck="false">
+    </div>
 
-    <form action="/payroll-gender" method="POST">
-      <div class="govuk-form-group">
-        <h1 class="govuk-label-wrapper">
-          <label class="govuk-label govuk-label--l">
-            Your personal bank account details
-          </label>
-        </h1>
-        <br>
-        <div class="govuk-form-group">
-          <h1 class="govuk-label-wrapper">
-            <label class="govuk-label govuk-label" for="bank-account-name">
-              Name on the account
-            </label>
-          </h1>
-          <div id="bank-account-name-hint" class="govuk-hint">
-            The name as it appears on your bank card or bank statements
-          </div>
-          <input class="govuk-input govuk-!-width-full" id="bank-account-name" name="bankAccountName" type="text" spellcheck="false" aria-describedby="bank-account-name-hint" inputmode="numeric">
-        </div>
-        <div class="govuk-form-group">
-          <h1 class="govuk-label-wrapper">
-            <label class="govuk-label govuk-label" for="sort-code">
-              Sort code
-            </label>
-          </h1>
-          <div id="sort-code-hint" class="govuk-hint">
-            Must be 6 digits long
-          </div>
-          <input class="govuk-input govuk-input--width-10" id="sort-code" name="sortCode" type="text" spellcheck="false" aria-describedby="sort-code-hint" inputmode="numeric">
-        </div>
-        <div class="govuk-form-group">
-          <h1 class="govuk-label-wrapper">
-            <label class="govuk-label govuk-label" for="account-number">
-              Account number
-            </label>
-          </h1>
-          <div id="account-number-hint" class="govuk-hint">
-            Must be between 6 and 8 digits long
-          </div>
-          <input class="govuk-input govuk-input--width-20" id="account-number" name="accountNumber" type="text" spellcheck="false" aria-describedby="account-number-hint" inputmode="numeric">
-        </div>
-        </div>
+    <!-- Sort Code -->
+    <div id="sort-code-group" class="govuk-form-group">
+      <label class="govuk-label" for="sort-code">Sort code</label>
+      <p id="sort-code-error" class="govuk-error-message" style="display: none;">
+        <span class="govuk-visually-hidden">Error:</span> Enter a valid 6-digit sort code.
+      </p>
+      <div id="sort-code-hint" class="govuk-hint">
+        Must be 6 digits long
+      </div>
+      <input class="govuk-input govuk-input--width-10" id="sort-code" name="sortCode" type="text" spellcheck="false" aria-describedby="sort-code-hint" inputmode="numeric">
+    </div>
 
-              <button type="submit" class="govuk-button" data-module="govuk-button">
-        Continue
-      </button>
-    </form>    
+    <!-- Account Number -->
+    <div id="account-number-group" class="govuk-form-group">
+      <label class="govuk-label" for="account-number">Account number</label>
+      <p id="account-number-error" class="govuk-error-message" style="display: none;">
+        <span class="govuk-visually-hidden">Error:</span> Enter a valid account number (6-8 digits).
+      </p>
+      <div id="account-number-hint" class="govuk-hint">
+        Must be between 6 and 8 digits long
+      </div>
+      <input class="govuk-input govuk-input--width-20" id="account-number" name="accountNumber" type="text" spellcheck="false" aria-describedby="account-number-hint" inputmode="numeric">
+    </div>
 
+    {{ govukButton({
+      text: "Continue",
+      id: "continue-button"
+    }) }}
+
+  </div>
+</div>
+
+<script>
+  document.getElementById('continue-button').addEventListener('click', function(event) {
+    event.preventDefault(); // Prevent default form submission
+    
+    // Get input values
+    var bankAccountName = document.getElementById('bank-account-name').value.trim();
+    var sortCode = document.getElementById('sort-code').value.trim();
+    var accountNumber = document.getElementById('account-number').value.trim();
+    var errorList = document.getElementById('error-list');
+
+    // Error handling
+    var hasError = false;
+
+    // Reset all error states
+    document.getElementById('error-summary').style.display = 'none';
+    errorList.innerHTML = ''; // Clear previous errors
+    document.querySelectorAll('.govuk-form-group--error').forEach(el => el.classList.remove('govuk-form-group--error'));
+    document.querySelectorAll('.govuk-error-message').forEach(el => el.style.display = 'none');
+    document.querySelectorAll('.govuk-input--error').forEach(el => el.classList.remove('govuk-input--error'));
+
+    // Check for errors
+    if (!bankAccountName) {
+      document.getElementById('bank-account-name-group').classList.add('govuk-form-group--error');
+      document.getElementById('bank-account-name-error').style.display = 'block';
+      document.getElementById('bank-account-name').classList.add('govuk-input--error');
+      errorList.innerHTML += '<li><a href="#bank-account-name">Enter a valid name on the account</a></li>';
+      hasError = true;
+    }
+
+    if (!/^\d{6}$/.test(sortCode)) {
+      document.getElementById('sort-code-group').classList.add('govuk-form-group--error');
+      document.getElementById('sort-code-error').style.display = 'block';
+      document.getElementById('sort-code').classList.add('govuk-input--error');
+      errorList.innerHTML += '<li><a href="#sort-code">Enter a valid 6-digit sort code</a></li>';
+      hasError = true;
+    }
+
+    if (!/^\d{6,8}$/.test(accountNumber)) {
+      document.getElementById('account-number-group').classList.add('govuk-form-group--error');
+      document.getElementById('account-number-error').style.display = 'block';
+      document.getElementById('account-number').classList.add('govuk-input--error');
+      errorList.innerHTML += '<li><a href="#account-number">Enter a valid account number (6-8 digits)</a></li>';
+      hasError = true;
+    }
+
+    // If there's an error, show the error summary
+    if (hasError) {
+      document.getElementById('error-summary').style.display = 'block';
+    } else {
+      // Proceed with form submission
+      this.closest('form').submit(); // Submit the form if no errors
+    }
+  });
+</script>
 
 {% endblock %}
-
-

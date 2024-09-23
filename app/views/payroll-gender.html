@@ -1,7 +1,7 @@
 {% extends "/layouts/one-login.html" %}
+
 {% block pageTitle %}
   {{ serviceName }} – GOV.UK Prototype Kit
-  
 {% endblock %}
 
 {% block beforeContent %}
@@ -12,6 +12,7 @@
     </strong>
     <span class="govuk-phase-banner__text">
       This is not a real service
+    </span>
   </p>
 </div>
 {{ govukBackLink({
@@ -22,14 +23,22 @@
 
 {% block content %}
 
+<!-- Error Summary -->
+<div id="error-summary" class="govuk-error-summary" data-module="govuk-error-summary" style="display: none;">
+  <div role="alert">
+    <h2 class="govuk-error-summary__title">There is a problem</h2>
+    <div class="govuk-error-summary__body">
+      <ul class="govuk-list govuk-error-summary__list" id="error-list">
+        <!-- Error items will be inserted here dynamically -->
+      </ul>
+    </div>
+  </div>
+</div>
 
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
-
-  
-
-    <form action="/check-answers" method="POST">
-      <div class="govuk-form-group">
+    <form id="gender-form" action="/check-answers" method="POST">
+      <div class="govuk-form-group" id="gender-group">
         <h1 class="govuk-label-wrapper">
           <label class="govuk-label govuk-label--l">
             How is your gender recorded on your employer’s payroll system?
@@ -37,41 +46,65 @@
         </h1>
         <br>
         <div id="event-name-hint" class="govuk-hint">
-         <p style="color:#505A5F;">We're asking this so that we can match HMRC’s records to make tax contributions for you. You should contact your payroll team if you're not sure how your gender is recorded.</p>
-
+          <p style="color:#505A5F;">We're asking this so that we can match HMRC’s records to make tax contributions for you. You should contact your payroll team if you're not sure how your gender is recorded.</p>
         </div>
-        <div class="govuk-radios" data-module="govuk-radios">
-          <div class="govuk-radios__item">
-            <input class="govuk-radios__input" id="genderPayrollFemale" name="genderPayroll" type="radio" value="Female">
-            <label class="govuk-label govuk-radios__label" for="genderPayrollFemale">
-              Female
-            </label>
-          </div>
-          <div class="govuk-radios__item">
-            <input class="govuk-radios__input" id="genderPayrollMale" name="genderPayroll" type="radio" value="Male">
-            <label class="govuk-label govuk-radios__label" for="genderPayrollMale">
-              Male
-            </label>
-          </div>
-          <div class="govuk-radios__divider">or</div>
-              </div>
-              <div class="govuk-radios__item">
-                <input class="govuk-radios__input" id="genderPayrollUnsure" name="genderPayroll" type="radio" value="I don't know">
-                <label class="govuk-label govuk-radios__label" for="genderPayrollUnsure">
-                  I don't know
-                </label>
-              </div>
+
+        <fieldset class="govuk-fieldset" aria-describedby="gender-error">
+          <p id="gender-error" class="govuk-error-message" style="display: none;">
+            <span class="govuk-visually-hidden">Error:</span> Select your gender
+          </p>
+          <div class="govuk-radios" data-module="govuk-radios">
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="genderPayrollFemale" name="genderPayroll" type="radio" value="Female">
+              <label class="govuk-label govuk-radios__label" for="genderPayrollFemale">Female</label>
             </div>
-          </fieldset>
-        </div>
-        </div>
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="genderPayrollMale" name="genderPayroll" type="radio" value="Male">
+              <label class="govuk-label govuk-radios__label" for="genderPayrollMale">Male</label>
+            </div>
+            <div class="govuk-radios__divider">or</div>
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="genderPayrollUnsure" name="genderPayroll" type="radio" value="I don't know">
+              <label class="govuk-label govuk-radios__label" for="genderPayrollUnsure">I don't know</label>
+            </div>
+          </div>
+        </fieldset>
+      </div>
 
-      <button type="submit" class="govuk-button" data-module="govuk-button">
-        Continue
-      </button>
+      <button type="submit" class="govuk-button" data-module="govuk-button">Continue</button>
     </form>    
+  </div>
+</div>
 
+<script>
+  document.getElementById('gender-form').addEventListener('submit', function(event) {
+    event.preventDefault(); // Prevent default form submission
+
+    // Check if any radio button is selected
+    var selectedGender = document.querySelector('input[name="genderPayroll"]:checked');
+    var errorList = document.getElementById('error-list');
+    var genderGroup = document.getElementById('gender-group');
+    var genderError = document.getElementById('gender-error');
+
+    // Reset all error states
+    document.getElementById('error-summary').style.display = 'none';
+    errorList.innerHTML = ''; // Clear previous errors
+    genderGroup.classList.remove('govuk-form-group--error');
+    genderError.style.display = 'none';
+
+    // Check for errors
+    if (!selectedGender) {
+      errorList.innerHTML += '<li><a href="#genderPayrollFemale">Select your gender</a></li>';
+      document.getElementById('error-summary').style.display = 'block';
+      genderGroup.classList.add('govuk-form-group--error');
+      genderError.style.display = 'block';
+    }
+
+    // If there are no errors, submit the form
+    if (selectedGender) {
+      this.submit(); // Proceed with form submission
+    }
+  });
+</script>
 
 {% endblock %}
-
-

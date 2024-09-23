@@ -2,7 +2,6 @@
 
 {% block pageTitle %}
   {{ serviceName }} – GOV.UK Prototype Kit
-  
 {% endblock %}
 
 {% block beforeContent %}
@@ -13,6 +12,7 @@
     </strong>
     <span class="govuk-phase-banner__text">
       This is not a real service
+    </span>
   </p>
 </div>
 {{ govukBackLink({
@@ -23,58 +23,150 @@
 
 {% block content %}
 
+<!-- Error Summary -->
+<div id="error-summary" class="govuk-error-summary" data-module="govuk-error-summary" style="display: none;">
+  <div role="alert">
+    <h2 class="govuk-error-summary__title">There is a problem</h2>
+    <div class="govuk-error-summary__body">
+      <ul class="govuk-list govuk-error-summary__list" id="error-list">
+        <!-- Error items will be inserted here dynamically -->
+      </ul>
+    </div>
+  </div>
+</div>
 
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
-
     <h1 class="govuk-heading-l">What is your address?</h1>
 
-      <!-- Address fields -->
-      <div class="govuk-form-group">
-        <label class="govuk-label" for="house-number-or-name">House number or name</label>
-        <input class="govuk-input" id="house-number-or-name" name="houseNumberOrName" type="text">
-      </div>
-      <div class="govuk-form-group">
-        <label class="govuk-label" for="building-and-street">Building and street</label>
-        <input class="govuk-input" id="building-and-street" name="buildingAndStreet" type="text">
-      </div>
-      <div class="govuk-form-group">
-        <label class="govuk-label" for="town-or-city">Town or city</label>
-        <input class="govuk-input govuk-input--width-20" id="town-or-city" name="townOrCity" type="text">
-      </div>
-      <div class="govuk-form-group">
-        <label class="govuk-label" for="county">County</label>
-        <input class="govuk-input govuk-input--width-20" id="county" name="countyName" type="text">
-      </div>
-      <div class="govuk-form-group">
-        <label class="govuk-label" for="post-code">Postcode</label>
-        <input class="govuk-input govuk-input--width-5" id="post-code" name="postCode" type="text">
-      </div>
-    
-      {{ govukButton({
-        text: "Continue",
-        href: "email-address",
-        id: "continue-button"
-      }) }}
+    <!-- Address fields -->
+    <div id="house-number-or-name-group" class="govuk-form-group">
+      <label class="govuk-label" for="house-number-or-name">House number or name</label>
+      <p id="house-number-or-name-error" class="govuk-error-message" style="display: none;">
+        <span class="govuk-visually-hidden">Error:</span> Enter your house number or name.
+      </p>
+      <input class="govuk-input" id="house-number-or-name" name="houseNumberOrName" type="text">
+    </div>
 
-      <script>
-        document.getElementById('continue-button').addEventListener('click', function() {
-          var houseNumberOrName = document.getElementById('house-number-or-name').value;
-          var buildingAndStreet = document.getElementById('building-and-street').value;
-          var townOrCity = document.getElementById('town-or-city').value;
-          var county = document.getElementById('county').value;
-          var postCode = document.getElementById('post-code').value;
-  
-          // Store values in localStorage or sessionStorage
-          sessionStorage.setItem('houseNumberOrName', houseNumberOrName);
-          sessionStorage.setItem('buildingAndStreet', buildingAndStreet);
-          sessionStorage.setItem('townOrCity', townOrCity);
-          sessionStorage.setItem('county', county);
-          sessionStorage.setItem('postCode', postCode);
-  
-          // Redirect to the next page
-          window.location.href = 'payroll-gender';
-        });
-      </script>
+    <div id="building-and-street-group" class="govuk-form-group">
+      <label class="govuk-label" for="building-and-street">Building and street</label>
+      <p id="building-and-street-error" class="govuk-error-message" style="display: none;">
+        <span class="govuk-visually-hidden">Error:</span> Enter your building and street.
+      </p>
+      <input class="govuk-input" id="building-and-street" name="buildingAndStreet" type="text">
+    </div>
+
+    <div id="town-or-city-group" class="govuk-form-group">
+      <label class="govuk-label" for="town-or-city">Town or city</label>
+      <p id="town-or-city-error" class="govuk-error-message" style="display: none;">
+        <span class="govuk-visually-hidden">Error:</span> Enter your town or city.
+      </p>
+      <input class="govuk-input govuk-input--width-20" id="town-or-city" name="townOrCity" type="text">
+    </div>
+
+    <div id="county-group" class="govuk-form-group">
+      <label class="govuk-label" for="county">County</label>
+      <p id="county-error" class="govuk-error-message" style="display: none;">
+        <span class="govuk-visually-hidden">Error:</span> Enter your county.
+      </p>
+      <input class="govuk-input govuk-input--width-20" id="county" name="countyName" type="text">
+    </div>
+
+    <div id="post-code-group" class="govuk-form-group">
+      <label class="govuk-label" for="post-code">Postcode</label>
+      <p id="post-code-error" class="govuk-error-message" style="display: none;">
+        <span class="govuk-visually-hidden">Error:</span> Enter your postcode.
+      </p>
+      <input class="govuk-input govuk-input--width-5" id="post-code" name="postCode" type="text">
+    </div>
+
+    {{ govukButton({
+      text: "Continue",
+      id: "continue-button"
+    }) }}
+
+  </div>
+</div>
+
+<script>
+  document.getElementById('continue-button').addEventListener('click', function(event) {
+    event.preventDefault(); // Prevent default form submission
+    
+    // Get input values
+    var houseNumberOrName = document.getElementById('house-number-or-name').value.trim();
+    var buildingAndStreet = document.getElementById('building-and-street').value.trim();
+    var townOrCity = document.getElementById('town-or-city').value.trim();
+    var county = document.getElementById('county').value.trim();
+    var postCode = document.getElementById('post-code').value.trim();
+
+    // Error handling
+    var hasError = false;
+    var errorList = document.getElementById('error-list');
+
+    // Reset all error states
+    document.getElementById('error-summary').style.display = 'none';
+    errorList.innerHTML = ''; // Clear previous errors
+    document.querySelectorAll('.govuk-form-group--error').forEach(el => el.classList.remove('govuk-form-group--error'));
+    document.querySelectorAll('.govuk-error-message').forEach(el => el.style.display = 'none');
+    document.querySelectorAll('.govuk-input--error').forEach(el => el.classList.remove('govuk-input--error'));
+
+    // Check if any of the required fields are empty and show errors
+    if (!houseNumberOrName) {
+      document.getElementById('house-number-or-name-group').classList.add('govuk-form-group--error');
+      document.getElementById('house-number-or-name-error').style.display = 'block';
+      document.getElementById('house-number-or-name').classList.add('govuk-input--error');
+      errorList.innerHTML += '<li><a href="#house-number-or-name">Enter your house number or name</a></li>';
+      hasError = true;
+    }
+
+    if (!buildingAndStreet) {
+      document.getElementById('building-and-street-group').classList.add('govuk-form-group--error');
+      document.getElementById('building-and-street-error').style.display = 'block';
+      document.getElementById('building-and-street').classList.add('govuk-input--error');
+      errorList.innerHTML += '<li><a href="#building-and-street">Enter your building and street</a></li>';
+      hasError = true;
+    }
+
+    if (!townOrCity) {
+      document.getElementById('town-or-city-group').classList.add('govuk-form-group--error');
+      document.getElementById('town-or-city-error').style.display = 'block';
+      document.getElementById('town-or-city').classList.add('govuk-input--error');
+      errorList.innerHTML += '<li><a href="#town-or-city">Enter your town or city</a></li>';
+      hasError = true;
+    }
+
+    if (!county) {
+      document.getElementById('county-group').classList.add('govuk-form-group--error');
+      document.getElementById('county-error').style.display = 'block';
+      document.getElementById('county').classList.add('govuk-input--error');
+      errorList.innerHTML += '<li><a href="#county">Enter your county</a></li>';
+      hasError = true;
+    }
+
+    if (!postCode) {
+      document.getElementById('post-code-group').classList.add('govuk-form-group--error');
+      document.getElementById('post-code-error').style.display = 'block';
+      document.getElementById('post-code').classList.add('govuk-input--error');
+      errorList.innerHTML += '<li><a href="#post-code">Enter your postcode</a></li>';
+      hasError = true;
+    }
+
+    // If there's an error, show the error summary
+    if (hasError) {
+      document.getElementById('error-summary').style.display = 'block';
+    } else {
+      // Store values in sessionStorage
+      sessionStorage.setItem('houseNumberOrName', houseNumberOrName);
+      sessionStorage.setItem('buildingAndStreet', buildingAndStreet);
+      sessionStorage.setItem('townOrCity', townOrCity);
+      sessionStorage.setItem('county', county);
+      sessionStorage.setItem('postCode', postCode);
+
+      // Redirect to the next page
+      window.location.href = 'email-address';
+    }
+  });
+</script>
 
 {% endblock %}
+

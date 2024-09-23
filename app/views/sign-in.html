@@ -4,8 +4,6 @@
   Question page template – {{ serviceName }} – GOV.UK Prototype Kit
 {% endblock %}
 
-
-
 {% block beforeContent %}
 <div class="govuk-phase-banner">
   <p class="govuk-phase-banner__content">
@@ -14,44 +12,55 @@
     </strong>
     <span class="govuk-phase-banner__text">
       This is not a real service
+    </span>
   </p>
 </div>
 
-  {{ govukBackLink({
+{{ govukBackLink({
   text: "Back",
   href: "javascript:window.history.back()"
 }) }}
 {% endblock %}
 
 {% block content %}
+  
+  <!-- Error Summary -->
+  <div id="error-summary" class="govuk-error-summary" data-module="govuk-error-summary" style="display: none;">
+    <div role="alert">
+      <h2 class="govuk-error-summary__title">There is a problem</h2>
+      <div class="govuk-error-summary__body">
+        <ul class="govuk-list govuk-error-summary__list">
+          <li>
+            <a href="#reference-number">Enter your claim reference</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
 
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-      <div class="govuk-form-group">
-        <div class="govuk-form-group">
+      <form class="form" id="claim-reference-form" action="" method="post" novalidate>
+        <div id="reference-number-group" class="govuk-form-group">
           <h1 class="govuk-label-wrapper">
             <label class="govuk-label govuk-label--l" for="reference-number">
               Enter your claim reference
             </label>
           </h1>
           <div id="reference-number-hint" class="govuk-hint">
-            Your claim reference is in the claim invite email from your employer. 
+            Your claim reference is in the claim invite email from your employer.
             It's a series of letters and numbers, like ABC1234E.
-            
           </div>
-          <input class="govuk-input govuk-input--width-10" id="reference-number" name="referenceNumber" type="text" spellcheck="false" aria-describedby="reference-number-hint" inputmode="numeric">
-          </div>
+          <p id="reference-number-error" class="govuk-error-message" style="display: none;">
+            <span class="govuk-visually-hidden">Error:</span> Enter your claim reference.
+          </p>
+          <input class="govuk-input govuk-input--width-10" id="reference-number" name="referenceNumber" type="text" spellcheck="false" aria-describedby="reference-number-hint reference-number-error" inputmode="numeric">
         </div>
-
-        <form class="form" id="claim-reference-form" action="" method="post">
-
 
         {{ govukButton({
           text: "Continue"
         }) }}
-
       </form>
-
     </div>
   </div>
 
@@ -61,17 +70,26 @@
       
       // Get the value from the input field
       const input = document.getElementById('reference-number').value.trim().toUpperCase();
-  
-      // Check if the input matches the valid code
-      if (input === 'HDJ2123F') {
-        // Redirect to the correct page if the code is valid
+      const inputGroup = document.getElementById('reference-number-group');
+      const errorMessage = document.getElementById('reference-number-error');
+      const errorSummary = document.getElementById('error-summary');
+
+      // Check if the input field is empty
+      if (input === '') {
+        // Show the error summary
+        errorSummary.style.display = 'block';
+
+        // Add the error state to the input group
+        inputGroup.classList.add('govuk-form-group--error');
+        errorMessage.style.display = 'block';
+        document.getElementById('reference-number').classList.add('govuk-input--error');
+      } else if (input === 'HDJ2123F') {
+        // If the code is correct, redirect to the success page
         window.location.href = '/one-login-sign-in';
       } else {
-        // Redirect to the incorrect code page if the code is invalid
+        // If the code is incorrect, redirect to the error page
         window.location.href = '/incorrect-code';
       }
     });
   </script>
-
-
 {% endblock %}

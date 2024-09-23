@@ -2,17 +2,13 @@
 
 {% block pageTitle %}
   {{ serviceName }} – GOV.UK Prototype Kit
-  
 {% endblock %}
 
 {% block beforeContent %}
 <div class="govuk-phase-banner">
   <p class="govuk-phase-banner__content">
-    <strong class="govuk-tag govuk-phase-banner__content__tag">
-      PROTOTYPE
-    </strong>
-    <span class="govuk-phase-banner__text">
-      This is not a real service
+    <strong class="govuk-tag govuk-phase-banner__content__tag">PROTOTYPE</strong>
+    <span class="govuk-phase-banner__text">This is not a real service</span>
   </p>
 </div>
 {{ govukBackLink({
@@ -22,120 +18,182 @@
 {% endblock %}
 
 {% block content %}
-
-
 <div class="govuk-grid-row">
-    <div class="govuk-grid-column-two-thirds">
+  <div class="govuk-grid-column-two-thirds">
+    
+    <!-- Error Summary (hidden initially) -->
+    <div id="error-summary" class="govuk-error-summary" data-module="govuk-error-summary" style="display: none;">
+      <div role="alert">
+        <h2 class="govuk-error-summary__title">There is a problem</h2>
+        <div class="govuk-error-summary__body">
+          <ul id="error-list" class="govuk-list govuk-error-summary__list"></ul>
+        </div>
+      </div>
+    </div>
 
-<h1 class="govuk-heading-l">
-    Personal details
-  </h1>
+    <h1 class="govuk-heading-l">Personal details</h1>
+    <h2 class="govuk-heading-m">What is your full name?</h2>
 
-  <h2 class="govuk-heading-m">What is your full name?</h2>
-
-  <form class="form" action="/enter-home-address" method="post">
-    <p>
+    <form class="form" id="personal-details-form" action="/enter-home-address" method="post" novalidate>
+      <!-- First name -->
       <div id="first-name-group" class="govuk-form-group">
-        <label class="govuk-label" for="first-name">
-          First name
-        </label>
+        <label class="govuk-label" for="first-name">First name</label>
         <p id="first-name-error" class="govuk-error-message" style="display: none;">
-          <span class="govuk-visually-hidden">Error:</span> Enter employee's first name
+          <span class="govuk-visually-hidden">Error:</span> Enter your first name.
         </p>
         <input class="govuk-input" id="first-name" name="firstName" type="text" value="{{ data['first-name'] }}" autocomplete="first-name">
       </div>
-     
+      
+      <!-- Middle name (Optional) -->
       <div id="middle-name-group" class="govuk-form-group">
-        <label class="govuk-label" for="middle-name">
-          Middle names
-        </label>
-        <p id="middle-name-error" class="govuk-error-message" style="display: none;">
-          <span class="govuk-visually-hidden">Error:</span> Enter employee's middle name
-        </p>
+        <label class="govuk-label" for="middle-name">Middle names</label>
         <input class="govuk-input" id="middle-name" name="middleName" type="text" value="{{ data['middle-name'] }}" autocomplete="middle-name">
       </div>
 
+      <!-- Last name -->
       <div id="last-name-group" class="govuk-form-group">
-        <label class="govuk-label" for="last-name">
-          Last name
-        </label>
+        <label class="govuk-label" for="last-name">Last name</label>
         <p id="last-name-error" class="govuk-error-message" style="display: none;">
-          <span class="govuk-visually-hidden">Error:</span> Enter employee's last name
+          <span class="govuk-visually-hidden">Error:</span> Enter your last name.
         </p>
         <input class="govuk-input" id="last-name" name="lastName" type="text" value="{{ data['last-name'] }}" autocomplete="last-name">
       </div>
-    </p>
 
-  <br>
-
-  <div class="govuk-form-group">
-    <fieldset class="govuk-fieldset" role="group" aria-describedby="dob-hint">
-      <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
-        <h1 class="govuk-fieldset__heading">
-         What is your date of birth?
-        </h1>
-      </legend>
-      <div id="dob-hint" class="govuk-hint">
-        For example, 31 03 1980. We need this information to verify your identity.
-      </div>
-      <div class="govuk-date-input" id="dob-issued">
-        <div class="govuk-date-input__item">
-          <div class="govuk-form-group">
-            <label class="govuk-label govuk-date-input__label" for="dob-issued-day">
-              Day
-            </label>
-            <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="dob-issued-day" name="dobDay" type="text" inputmode="numeric">
-          </div>
-        </div>
-        <div class="govuk-date-input__item">
-          <div class="govuk-form-group">
-            <label class="govuk-label govuk-date-input__label" for="dob-issued-month">
-              Month
-            </label>
-            <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="dob-issued-month" name="dobMonth" type="text" inputmode="numeric">
-          </div>
-        </div>
-        <div class="govuk-date-input__item">
-          <div class="govuk-form-group">
-            <label class="govuk-label govuk-date-input__label" for="dob-issued-year">
-              Year
-            </label>
-            <input class="govuk-input govuk-date-input__input govuk-input--width-4" id="dob-issued-year" name="dobYear" type="text" inputmode="numeric">
-          </div>
-        </div>
-      </div>
-    </fieldset>
+     <!-- Date of Birth -->
+<fieldset class="govuk-fieldset" role="group" aria-describedby="dob-hint">
+  <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
+    <h1 class="govuk-fieldset__heading">What is your date of birth?</h1>
+  </legend>
+  <div id="dob-hint" class="govuk-hint">
+    For example, 31 03 1980. We need this information to verify your identity.
   </div>
-
-  <br>
-
-  <div class="govuk-form-group">
-    <fieldset class="govuk-fieldset" role="group" aria-describedby="ni-hint">
-      <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
-        <h1 class="govuk-fieldset__heading">
-        What is your National Insurance number?
-        </h1>
-      </legend>
-      <div id="ni-hint" class="govuk-hint">
-        It’s on your National Insurance card, benefit letter, payslip or P60. For example ‘QQ123456C’.
+  <div class="govuk-form-group" id="dob-group">
+    <p id="dob-error" class="govuk-error-message" style="display: none;">
+      <span class="govuk-visually-hidden">Error:</span> Enter a valid date of birth.
+    </p>
+    <div class="govuk-date-input" id="dob-issued">
+      <div class="govuk-date-input__item">
+        <div class="govuk-form-group">
+          <label class="govuk-label govuk-date-input__label" for="dob-issued-day">Day</label>
+          <input class="govuk-input govuk-input--width-2" id="dob-issued-day" name="dobDay" type="text" inputmode="numeric">
+        </div>
       </div>
-      <div class="govuk-date-input" id="ni-issued">
-        <div class="govuk-date-input__item">
-            <div class="govuk-form-group">
-                <input class="govuk-input govuk-input--width-10" id="ni-number" name="nationalInsuranceNumber" type="text">
-              </div>
+      <div class="govuk-date-input__item">
+        <div class="govuk-form-group">
+          <label class="govuk-label govuk-date-input__label" for="dob-issued-month">Month</label>
+          <input class="govuk-input govuk-input--width-2" id="dob-issued-month" name="dobMonth" type="text" inputmode="numeric">
         </div>
-
+      </div>
+      <div class="govuk-date-input__item">
+        <div class="govuk-form-group">
+          <label class="govuk-label govuk-date-input__label" for="dob-issued-year">Year</label>
+          <input class="govuk-input govuk-input--width-4" id="dob-issued-year" name="dobYear" type="text" inputmode="numeric">
         </div>
+      </div>
     </div>
+  </div>
+</fieldset>
 
+
+      <!-- National Insurance Number -->
+      <fieldset class="govuk-fieldset" role="group" aria-describedby="ni-hint">
+        <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
+          <h1 class="govuk-fieldset__heading">What is your National Insurance number?</h1>
+        </legend>
+        <div id="ni-hint" class="govuk-hint">
+          It’s on your National Insurance card, benefit letter, payslip or P60. For example ‘QQ123456C’.
+        </div>
+        <div id="ni-group" class="govuk-form-group">
+          <p id="ni-error" class="govuk-error-message" style="display: none;">
+            <span class="govuk-visually-hidden">Error:</span> Enter your National Insurance number.
+          </p>
+          <input class="govuk-input govuk-input--width-10" id="ni-number" name="nationalInsuranceNumber" type="text">
+        </div>
+      </fieldset>
+
+      <!-- Continue button -->
+      {{ govukButton({
+        text: "Continue"
+      }) }}
+    </form>
+  </div>
+</div>
+
+<script>
+  document.getElementById('personal-details-form').addEventListener('submit', function(event) {
+    event.preventDefault(); // Prevent the form from submitting
     
-    {{ govukButton({
-      text: "Continue"
-    }) }}
+    // Clear previous error states
+    const errorElements = document.querySelectorAll('.govuk-error-message');
+    const errorInputs = document.querySelectorAll('.govuk-input--error');
+    const errorSummary = document.getElementById('error-summary');
+    const errorList = document.getElementById('error-list');
+    errorElements.forEach(el => el.style.display = 'none');
+    errorInputs.forEach(input => input.classList.remove('govuk-input--error'));
+    errorSummary.style.display = 'none';
+    errorList.innerHTML = ''; // Clear the previous error list
 
+    let hasError = false;
+    const errors = [];
 
-      </form>
+    // Check first name
+    const firstName = document.getElementById('first-name').value.trim();
+    if (!firstName) {
+      document.getElementById('first-name-group').classList.add('govuk-form-group--error');
+      document.getElementById('first-name-error').style.display = 'block';
+      document.getElementById('first-name').classList.add('govuk-input--error');
+      errors.push({ field: 'first-name', message: 'Enter your first name' });
+      hasError = true;
+    }
+
+    // Check last name
+    const lastName = document.getElementById('last-name').value.trim();
+    if (!lastName) {
+      document.getElementById('last-name-group').classList.add('govuk-form-group--error');
+      document.getElementById('last-name-error').style.display = 'block';
+      document.getElementById('last-name').classList.add('govuk-input--error');
+      errors.push({ field: 'last-name', message: 'Enter your last name' });
+      hasError = true;
+    }
+
+    // Check date of birth (entire group)
+const dobDay = document.getElementById('dob-issued-day').value.trim();
+const dobMonth = document.getElementById('dob-issued-month').value.trim();
+const dobYear = document.getElementById('dob-issued-year').value.trim();
+
+if (!dobDay || !dobMonth || !dobYear) {
+  document.getElementById('dob-group').classList.add('govuk-form-group--error');
+  document.getElementById('dob-error').style.display = 'block';
+  document.getElementById('dob-issued-day').classList.add('govuk-input--error');
+  document.getElementById('dob-issued-month').classList.add('govuk-input--error');
+  document.getElementById('dob-issued-year').classList.add('govuk-input--error');
+  errors.push({ field: 'dob-group', message: 'Enter a valid date of birth' });
+  hasError = true;
+}
+
+    // Check National Insurance number
+    const niNumber = document.getElementById('ni-number').value.trim();
+    if (!niNumber) {
+      document.getElementById('ni-group').classList.add('govuk-form-group--error');
+      document.getElementById('ni-error').style.display = 'block';
+      document.getElementById('ni-number').classList.add('govuk-input--error');
+      errors.push({ field: 'ni-number', message: 'Enter your National Insurance number' });
+      hasError = true;
+    }
+
+    // Show error summary if any errors are found
+    if (hasError) {
+      errors.forEach(error => {
+        const li = document.createElement('li');
+        li.innerHTML = `<a href="#${error.field}">${error.message}</a>`;
+        errorList.appendChild(li);
+      });
+      errorSummary.style.display = 'block';
+      errorSummary.scrollIntoView(); // Focus on the error summary for accessibility
+    } else {
+      this.submit(); // Submit the form if there are no errors
+    }
+  });
+</script>
 
 {% endblock %}
-

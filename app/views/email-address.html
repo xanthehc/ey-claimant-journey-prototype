@@ -22,16 +22,31 @@
 {% endblock %}
 
 {% block content %}
+<!-- Error Summary -->
+<div id="error-summary" class="govuk-error-summary" data-module="govuk-error-summary" style="display: {% if error %}block{% else %}none{% endif %};">
+  <div role="alert">
+    <h2 class="govuk-error-summary__title">There is a problem</h2>
+    <div class="govuk-error-summary__body">
+      <ul class="govuk-list govuk-error-summary__list">
+        {% if error %}
+        <li>
+          <a href="#email-address">{{ error }}</a>
+        </li>
+        {% endif %}
+      </ul>
+    </div>
+  </div>
+</div>
+
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
     <form class="form" id="email-form" method="post" action="/email-address"> 
       <h1 class="govuk-heading-l">Your email address</h1>
 
-      <div id="event-name-hint" class="govuk-hint">
+      <div class="govuk-hint">
         We'll use this to update you with progress on your claim.
       </div>
-
-      <div id="event-name-hint" class="govuk-hint">
+      <div class="govuk-hint">
         We recommend you use a non-work email address in case your circumstances change while we process your claim.
       </div>
       <br>
@@ -55,24 +70,41 @@
       {{ govukButton({
         text: "Continue",
         id: "submit-button"
-      })}}
+      }) }}
     </form>
   </div>
 </div>
 {% endblock %}
 
-
 <script>
+  const sendEmail = require('./test'); // Import the sendEmail function
 
-const sendEmail = require('./test'); // Import the sendEmail function
-
-  document.getElementById('emailForm').addEventListener('submit', function(event) {
+  document.getElementById('email-form').addEventListener('submit', function(event) {
       event.preventDefault(); // Prevent default form submission
       
-      const email = document.getElementById('email').value; // Get user input email
+      const email = document.getElementById('email-address').value; // Get user input email
+
+      // Validate email format
+      if (!email) {
+          showError('Please enter your email address.');
+          return;
+      }
       
       // Call sendEmail function with the user input email
       sendEmail(email);
   });
 
-  </script>
+  function showError(message) {
+      const errorSummary = document.getElementById('error-summary');
+      const errorList = document.querySelector('.govuk-error-summary__list');
+
+      errorSummary.style.display = 'block';
+      errorList.innerHTML = `<li><a href="#email-address">${message}</a></li>`;
+      
+      const emailGroup = document.getElementById('email-address-group');
+      emailGroup.classList.add('govuk-form-group--error');
+      document.getElementById('email-address-error').textContent = message;
+      document.getElementById('email-address-error').style.display = 'block';
+      document.getElementById('email-address').classList.add('govuk-input--error');
+  }
+</script>
