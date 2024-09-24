@@ -152,35 +152,43 @@
    {% endblock %}
    
    {% block footer %}
-   {{ govukFooter({
-     meta: {
-       items: [
-         {
-           href: "/manage-prototype",
-           text: "Manage your prototype"
-         },
-         {
-          href: "/policy",
-          text: "Policy context"
-        },
-        {
-          href: "/one-login-sign-in",
-          text: "Skip sign in"
-        },
-        {
-          href: "/fully-submit-application-page",
-          text: "Sign in again shortcut"
-        },
-        {
-          href: "/one-login-idv-fail",
-          text: "IDV fail shortcut"
-        },
-         {
-           href: "/manage-prototype/clear-data",
-           text: "Clear data"
-         }
-       ],
-       visuallyHiddenTitle: "Footer links"
-     }
-   }) }}
-  {% endblock %}
+ {{ govukFooter({
+   meta: {
+     items: [
+       {
+         href: "/manage-prototype",
+         text: "Manage your prototype"
+       },
+      {
+        href: "/sign-in",
+        text: "Sign in"
+      },
+      {
+        href: "/one-login-sign-in",
+        text: "Skip sign in"
+      },
+      {
+        href: "/sign-in-again",
+        text: "Second sign in shortcut"
+      },
+      {
+        href: "/fully-submit-application-page",
+        text: "Skip second sign in"
+      },
+      {
+        href: "/one-login-idv-fail",
+        text: "IDV fail shortcut"
+      },
+      {
+        href: "/one-login-idv-success",
+        text: "IDV success shortcut"
+      },
+       {
+         href: "/manage-prototype/clear-data",
+         text: "Clear data"
+       }
+     ],
+     visuallyHiddenTitle: "Footer links"
+   }
+ }) }}
+{% endblock %}

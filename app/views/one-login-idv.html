@@ -48,7 +48,7 @@
 
 
 <div class="govuk-button-primary">
-  <button type="submit" class="govuk-button" data-module="govuk-button" onclick="location.href='/one-login-idv-success'">
+  <button type="submit" class="govuk-button" data-module="govuk-button">
     Continue
   </button>
 </div>
@@ -56,4 +56,18 @@
       </div>
     </div>
 
+    <script>
+      document.querySelector('.govuk-button').addEventListener('click', function(event) {
+        event.preventDefault(); // Prevent default form submission
+    
+        // Generate a random number (0 or 1)
+        const randomRedirect = Math.random() < 0.5 ? '/one-login-idv-fail' : '/one-login-idv-success';
+    
+        // Redirect the user to the randomly selected page
+        window.location.href = randomRedirect;
+      });
+    </script>
+    
+
 {% endblock %}
+
