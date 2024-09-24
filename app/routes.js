@@ -57,7 +57,7 @@ router.post('/email-address-page', (req, res) => {
     }).catch(err => {
       console.error('Error sending second email:', err);
     });
-  }, 300000);
+  }, 60000);
 
   // Redirect to the next page if no errors
   res.redirect('/sign-in');
