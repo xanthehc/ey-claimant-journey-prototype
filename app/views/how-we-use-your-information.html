@@ -1,4 +1,4 @@
-{% extends "/layouts/one-login.html" %}
+{% extends "layouts/main.html" %}
 
 {% block pageTitle %}
   {{ serviceName }} – GOV.UK Prototype Kit
@@ -58,7 +58,7 @@
       <br>
       {{ govukButton({
         text: "Continue",
-        href: "/personal-details",
+        href: "/one-login-sign-in",
         isStartButton: false
       }) }}
 
