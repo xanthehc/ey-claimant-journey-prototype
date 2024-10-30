@@ -1,0 +1,265 @@
+{% extends "layouts/main.html" %}
+
+{% block pageTitle %}
+Early years incentive payment guidance
+{% endblock %}
+
+
+{% block header %}
+  <!-- Blank header with no service name for this page -->
+  {{ govukHeader() }}
+{% endblock %}
+
+{% block beforeContent %}
+
+  {{ govukBreadcrumbs({
+    items: [
+      {
+        text: "Home",
+        href: "#"
+      },
+      {
+        text: "Education, training and skills",
+        href: "#"
+      },
+      {
+        text: "Teaching and leadership",
+        href: "#"
+      },
+      {
+        text: "Recruiting, inducting and managing teachers",
+        href: "#"
+      }
+    ]
+  }) }}
+
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+  
+
+      <h1 class="govuk-heading-xl">
+        {{ serviceName }}: guidance for practitioners
+      </h1>
+      
+
+      <p>This scheme enables nurseries in participating local authorities to offer £1000 payments in job adverts to recruit new practitioners.</p>
+
+      <aside class="govuk-prototype-kit-common-templates-mainstream-guide-contents-list" role="complementary">
+        <nav class="govuk-prototype-kit-common-templates-contents-list" aria-label="Pages in this guide" role="navigation">
+          <h2 class="govuk-prototype-kit-common-templates-contents-list__title">
+            Contents
+          </h2>
+          <ol class="govuk-prototype-kit-common-templates-contents-list__list">
+            <li class="govuk-prototype-kit-common-templates-contents-list__list-item govuk-prototype-kit-common-templates-contents-list__list-item--dashed govuk-prototype-kit-common-templates-contents-list__list-item--active">
+              <a href="#">
+                How it works
+              </a>
+            </li>
+            <li class="govuk-prototype-kit-common-templates-contents-list__list-item govuk-prototype-kit-common-templates-contents-list__list-item--dashed govuk-prototype-kit-common-templates-contents-list__list-item--active">
+              <a href="#">
+                Eligibility
+              </a>
+            </li>
+            <li class="govuk-prototype-kit-common-templates-contents-list__list-item govuk-prototype-kit-common-templates-contents-list__list-item--dashed govuk-prototype-kit-common-templates-contents-list__list-item--active">
+              <a href="#">
+              Apprenticeships
+            </li>
+            <li class="govuk-prototype-kit-common-templates-contents-list__list-item govuk-prototype-kit-common-templates-contents-list__list-item--dashed">
+              <a href="#">
+                How you're paid
+              </a>
+            </li>
+              <li class="govuk-prototype-kit-common-templates-contents-list__list-item govuk-prototype-kit-common-templates-contents-list__list-item--dashed">
+              <a href="#">
+                Tax and deductions
+              </a>
+            </li>
+            <li class="govuk-prototype-kit-common-templates-contents-list__list-item govuk-prototype-kit-common-templates-contents-list__list-item--dashed">
+              <a href="#">
+                If you leave before you've been in the role for 6 months
+              </a>
+            </li>
+            </li>
+          </ol>
+        </nav>
+      </aside>
+
+    </div>
+
+  </div>
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds govuk-prototype-kit-common-templates-mainstream-guide-body">
+      
+      <div class="govuk-notification-banner" role="region" aria-labelledby="govuk-notification-banner-title" data-module="govuk-notification-banner">
+        <div class="govuk-notification-banner__header">
+          <h2 class="govuk-notification-banner__title" id="govuk-notification-banner-title">
+            Important
+          </h2>
+        </div>
+        <div class="govuk-notification-banner__content">
+          <p class="govuk-notification-banner__heading">
+            This service is in live testing and only available to users in our testing group. If you're not part of this group, you won't be able to access this service.
+          </p>
+        </div>
+      </div>
+
+
+      <div style="background-color: #f3f2f1; padding: 40px; padding-bottom: 20px;">
+        <h2 class="govuk-heading-m">Start a new claim</h2>
+        <p class="govuk-body">
+          You should only do this when you’ve recieved an email from the Department for Education that you're employer has started your claim.
+        </p>
+        <a href="/email-address-page" role="button" draggable="false" class="govuk-button govuk-button--start" data-module="govuk-button">
+          Start now
+          <svg class="govuk-button__start-icon" xmlns="http://www.w3.org/2000/svg" width="17.5" height="19" viewBox="0 0 33 40" aria-hidden="true" focusable="false">
+            <path fill="currentColor" d="M0 0h13l20 20-20 20H0l20-20z" />
+          </svg>
+        </a>
+      </div>
+
+      <br>
+
+
+      <h1 class="govuk-heading-l">
+        How it works
+      </h1>
+      
+      <p>To receive the payment, you must have applied for a job with an incentive attached.</p>
+      <p>After you’ve been offered and accepted the job, your nursery will start a claim on your behalf.</p>
+      <p>After the nursery has completed their part of the claim, you’ll receive an email inviting you to complete the claim on a digital service. To do this, we’ll help you create a GOV.UK One Login account if you do not already have one. This is so that we can verify your identity.</p>
+      <p>When we have verified your identity, we’ll ask you for a few details including your bank account details.</p>
+      <p>You’ll receive the incentive payment after you’ve been in the role for 6 months.</p>
+
+      <h1 class="govuk-heading-l">
+        Eligibility
+      </h1>
+
+      <p class="govuk-body">You’re eligible for a payment if:</p>
+      <ul class="govuk-list govuk-list--bullet">
+      <li>you have applied for a job with an incentive attached</li>
+      <li>you have not worked in a permanent role in an early years setting in the 6 months before starting your new role, where you spent most of your time (70% or more) working directly with children</li>
+      <li>the role you’ve applied for is a permanent contract (this applies to part and full-time roles)</li>
+      <li>you’ll spend most of the time (70% or more) in your role working directly with children</li>
+      </ul>
+
+      <p>You do not need to have any early years qualifications or have worked in a nursery before.</p>
+      <p>You cannot receive the incentive payment if you:</p>
+      <ul class="govuk-list govuk-list--bullet">
+      <li>have worked in a permanent role in a nursery in the last 6 months</li>
+      <li>will not be spending most of your time (70% or more) working directly with children in your new role</li>
+      </ul>
+      
+      <h1 class="govuk-heading-l">
+        Apprenticeships
+      </h1>
+
+      <p>Incentive payments are not available to apprentices, even if you have a permanent contract during your apprenticeship.</p>
+      <p>You can receive a payment when you move from being an apprentice to an employee. To do this, you must have passed your apprenticeship and been taken on in a permanent role.</p>
+      
+        <h1 class="govuk-heading-l">
+        How you're paid
+      </h1>
+      
+      <p>The Department for Education will pay the money directly into your bank account. This will happen after you have been in the role for 6 months.</p>
+
+      <h1 class="govuk-heading-l">
+        Tax and deductions
+      </h1>
+
+      <h2 class="govuk-heading-m">
+        Income tax
+      </h2>
+
+      <p>The Department for Education will pay Income Tax and National Insurance on your payment if your total annual income is less than £50,270.</p>
+
+      <h2 class="govuk-heading-m">
+        Universal Credit
+      </h2>
+
+      <p>If you claim Universal Credit, your £1000 payment may affect the amount of Universal Credit you receive.</p>
+      <p>Read more about <a href="https://www.gov.uk/guidance/universal-credit-and-earnings">how changes to your earnings can affect your Universal Credit.</a></p>
+
+      <h2 class="govuk-heading-m">
+        Student loan
+      </h2>
+
+      <p>Your £1000 payment will not be affected by any funding you have previously received to study for a college course or apprenticeship.</p>
+      <p>If you have previously studied at university and have a student loan, your £1000 payment may affect your repayments.</p>
+
+      <h2 class="govuk-heading-m">
+        If you're currently repaying a student loan
+      </h2>
+
+      <p>If your payslip shows that you’re repaying a student loan, a deduction towards it may come out of your £1000 payment.</p>
+
+      <h2 class="govuk-heading-m">
+        If you have a student loan but are not currently repaying it
+      </h2>
+
+      <p>If your payment takes you over the amount you must earn to start paying back a student loan, a deduction may go towards repaying it.</p>
+      <p>Read more about <a href="https://www.gov.uk/repaying-your-student-loan/when-you-start-repaying">when you start paying back a student loan</a> and <a href="https://www.gov.uk/repaying-your-student-loan/what-you-pay">what you'll pay.</a></p>
+      <p>You may be able to claim any deductions back at the end of the tax year. Read more about how you can <a href="https://www.gov.uk/repaying-your-student-loan/getting-a-refund">claim back student loan deductions.</a></p>
+
+      <h1 class="govuk-heading-l">
+        If you leave before you’ve been in the role for 6 months
+      </h1>
+
+      <p>You must stay in your role for 6 months to receive the payment.</p>
+
+
+      <nav class="govuk-prototype-kit-common-templates-pagination" role="navigation" aria-label="Pagination">
+
+
+    </div>
+
+    <div class="govuk-grid-column-one-third">
+
+      <aside class="govuk-prototype-kit-common-templates-related-items" role="complementary">
+        <h2 class="govuk-heading-m" id="subsection-title">
+          Related content
+        </h2>
+        <nav role="navigation" aria-labelledby="subsection-title">
+          <ul class="govuk-list govuk-!-font-size-16">
+            <li>
+              <a href="#">
+                Early years financial incentive payment service: guidance for providers
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                Early-career payments for teachers
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                Golden Hello reimbursement: guidance for local authorities and academies
+              </a>
+            </li>
+            <li>
+              <a href="#" class="govuk-!-font-weight-bold">
+                More <span class="govuk-visually-hidden">in Subsection</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </aside>
+
+    </div>
+
+  </main>
+</div>
+
+
+
+
+
+    </div>
+  </div>
+
+{% endblock %}
